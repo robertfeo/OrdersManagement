@@ -25,7 +25,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.example.restaurantorders'
-    mainClass = 'com.example.restaurantorders.HelloApplication'
+    mainClass = 'com.example.restaurantorders.Application'
 }
 
 javafx {

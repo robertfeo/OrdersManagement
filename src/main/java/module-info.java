@@ -10,6 +10,6 @@ module com.example.restaurantorders {
             requires org.kordamp.bootstrapfx.core;
             requires eu.hansolo.tilesfx;
 
-    opens com.example.restaurantorders to javafx.fxml;
     exports com.example.restaurantorders;
+    opens com.example.restaurantorders to javafx.fxml;
 }
