@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -18,11 +19,15 @@ public class Controller {
     private Button btnDbDisconnect;
     @FXML
     private Button btnDbConnect;
+    @FXML
+    private AnchorPane scenePane;
+
+    Stage stage;
 
     @FXML
     protected void connectToDatabase() throws IOException,NullPointerException {
         lbStatus.setTextFill(Color.color(0, 0.5, 0.2));
-        lbStatus.setText("Erfolgreich verbunden mit der Datenbank.");
+        lbStatus.setText("Verbindung erfolgreich hergestellt.");
         btnDbConnect.setDisable(true);
         btnDbDisconnect.setDisable(false);
     }
@@ -37,10 +42,8 @@ public class Controller {
 
     @FXML
     protected void quitProg() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("main-view.fxml"));
-        Stage stage = (Stage) btnQuit.getScene().getWindow();
+        this.stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
-        System.exit(0);
     }
 
 }
