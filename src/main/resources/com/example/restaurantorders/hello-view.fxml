@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1075.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.restaurantorders.Controller">
+   <children>
+      <VBox prefHeight="699.0" prefWidth="311.0" style="-fx-background-color: #5667FD;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="110.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="35.0" top="35.0" />
+               </padding>
+            </HBox>
+            <Button fx:id="btnUebersicht" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Übersicht" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="btnBestellungen" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Bestellungen" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="btnKunden" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Kunden" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="btnMenus" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Menüs" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="btnQuit" mnemonicParsing="false" onMouseClicked="#quitProg" prefHeight="65.0" prefWidth="311.0" stylesheets="@style.css" text="Beenden" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+         </children>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.0175" spread="0.32" width="18.07" />
+         </effect>
+      </VBox>
+      <Label alignment="CENTER" layoutX="319.0" layoutY="51.0" prefHeight="65.0" prefWidth="751.0" text="Restaurant Orders" textFill="#5667fd">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <VBox fx:id="pnItems" layoutX="319.0" layoutY="251.0" prefHeight="342.0" prefWidth="751.0" style="-fx-background-color: #ffff;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="185.0" prefWidth="751.0">
+               <children>
+                  <VBox prefHeight="185.0" prefWidth="245.0">
+                     <children>
+                        <Label fx:id="lbAnzahlBestellungen" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="Label" textFill="#5667fd">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="309.0" text="Anzahl Bestellungen" textFill="#5667fd">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="185.0" prefWidth="245.0">
+                     <children>
+                        <Label fx:id="lbRegKunden" alignment="CENTER" prefHeight="54.0" prefWidth="335.0" text="Label" textFill="#5667fd">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="348.0" text="Registrierte Kunden" textFill="#5667fd">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="185.0" prefWidth="245.0">
+                     <children>
+                        <Label fx:id="lbAnzahlMenus" alignment="CENTER" prefHeight="54.0" prefWidth="311.0" text="Label" textFill="#5667fd">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="313.0" text="Verfügbare Menüs" textFill="#5667fd">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="100.0" prefWidth="129.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="581.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="Datenbank" textFill="#5667fd">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="Status" textFill="#5667fd">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+                           <children>
+                              <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Datenbank verbinden" textAlignment="CENTER" textFill="WHITE" />
+                              <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Datenbank trennen" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
