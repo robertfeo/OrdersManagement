@@ -41,6 +41,8 @@ dependencies {
     implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
     implementation('eu.hansolo:tilesfx:11.48')
+    implementation('com.microsoft.sqlserver:mssql-jdbc:10.2.0.jre17')
+    implementation('org.openjfx:javafx-fxml:19-ea+5')
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
