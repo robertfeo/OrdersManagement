@@ -14,8 +14,6 @@ public class Controller {
     @FXML
     private Label lbStatus;
     @FXML
-    private Button btnQuit;
-    @FXML
     private Button btnDbDisconnect;
     @FXML
     private Button btnDbConnect;
@@ -42,6 +40,7 @@ public class Controller {
 
     @FXML
     protected void quitProg() throws IOException{
+        System.out.println("Quit pressed");
         this.stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
     }
