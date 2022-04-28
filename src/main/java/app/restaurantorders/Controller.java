@@ -1,7 +1,6 @@
-package com.example.restaurantorders;
+package app.restaurantorders;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -9,6 +8,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import app.restaurantorders.DBUtil;
 
 public class Controller {
     @FXML
@@ -20,10 +25,13 @@ public class Controller {
     @FXML
     private AnchorPane scenePane;
 
-    Stage stage;
+    private Stage stage;
+
+    private DBUtil dbUtils;
 
     @FXML
-    protected void connectToDatabase() throws IOException,NullPointerException {
+    protected void connectToDatabase() throws SQLException, ClassNotFoundException {
+        dbUtils.dbConnect();
         lbStatus.setTextFill(Color.color(0, 0.5, 0.2));
         lbStatus.setText("Verbindung erfolgreich hergestellt.");
         btnDbConnect.setDisable(true);
@@ -31,7 +39,8 @@ public class Controller {
     }
 
     @FXML
-    protected void disconnectFromDatabase() throws IOException,NullPointerException {
+    protected void disconnectFromDatabase() throws SQLException {
+        dbUtils.dbDisconnect();
         lbStatus.setTextFill(Color.color(0.7, 0.1, 0.1));
         lbStatus.setText("Verbindung wurde getrennt.");
         btnDbDisconnect.setDisable(true);

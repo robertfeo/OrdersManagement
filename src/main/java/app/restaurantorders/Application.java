@@ -1,4 +1,4 @@
-package com.example.restaurantorders;
+package app.restaurantorders;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

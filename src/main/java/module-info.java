@@ -1,4 +1,4 @@
-module com.example.restaurantorders {
+module app.restaurantorders {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -8,6 +8,7 @@ module com.example.restaurantorders {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.microsoft.sqlserver.jdbc;
-    exports com.example.restaurantorders;
-    opens com.example.restaurantorders to javafx.fxml;
+    requires java.sql;
+    exports app.restaurantorders;
+    opens app.restaurantorders to javafx.fxml;
 }
