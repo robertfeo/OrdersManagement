@@ -1,27 +1,25 @@
-package app.restaurantorders;
+package app.amagon;
 
 import java.sql.*;
 
 public class DBUtil {
     private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    //Hostname or IP
-    private static String dbHost="134.108.190.89";
-    //Port
-    private static String dbPort="1433";
-    //Database name
-    private static String dbName="SWB_DB2_Projekt";
-    //User
-    private static String dbUser="swb4";
-    //passwort
-    private static String dbPass="swb4";
+    private static String connectionURL;
+    private static Connection db_connection;
 
-    //Create a variable fpr the connection string
-    private static final String connectionURL="jdbc:sqlserver://"+
-            dbHost+":"+dbPort+";"+"databaseName="+dbName+";"+
-            "user="+dbUser+";"+
-            "password="+dbPass+";"+"encrypt=true;trustServerCertificate=true;";
+    public DBUtil() {
+        String dbHost = "134.108.190.89";
+        String dbPort = "1433";
+        String dbName = "SWB_DB2_Projekt";
+        String dbUser = "swb4";
+        String dbPass = "swb4";
+        connectionURL="jdbc:sqlserver://"+
+                dbHost +":"+ dbPort +";"+"databaseName="+ dbName +";"+
+                "user="+ dbUser +";"+
+                "password="+ dbPass +";"+"encrypt=true;trustServerCertificate=true;";
+    }
     //declare the JDBC objects
-    private static java.sql.Connection connection = null;
+    //private static java.sql.Connection connection = null;
     PreparedStatement p_stmt = null;
     ResultSet rs = null;
 
@@ -29,24 +27,23 @@ public class DBUtil {
         try{
             Class.forName(JDBC_DRIVER);
         }catch(ClassNotFoundException e){
-            System.out.println("Wo ist dein MySQL JDBC Driver?");
+            //System.out.println("Wo ist dein MySQL JDBC Driver?");
             e.printStackTrace();
             throw e;
         }
-        System.out.println("JDBC Driver wurde gefunden, alles gut!");
-
         try{
-            connection = DriverManager.getConnection(connectionURL);
+            db_connection = DriverManager.getConnection(connectionURL);
         }catch (SQLException e){
-            System.out.println("Verbindung fehlgeschlagen!");
+            //System.out.println("Verbindung fehlgeschlagen!");
+            e.printStackTrace();
             throw e;
         }
     }
 
     public static void dbDisconnect() throws SQLException{
         try {
-            if (connection != null && !connection.isClosed()){
-                connection.close();
+            if (db_connection != null && !db_connection.isClosed()){
+                db_connection.close();
             }
         }catch (Exception e){
             throw e;

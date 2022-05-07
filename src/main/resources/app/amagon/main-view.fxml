@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1075.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.restaurantorders.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1075.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.amagon.Controller">
    <children>
-      <VBox prefHeight="699.0" prefWidth="311.0" style="-fx-background-color: #5667FD;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="599.0" prefWidth="245.0" style="-fx-background-color: #5667FD;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -30,43 +30,48 @@
                   <Insets bottom="35.0" top="35.0" />
                </padding>
             </HBox>
-            <Button fx:id="btnUebersicht" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Übersicht" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnUebersicht" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Übersicht" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
-               </font></Button>
-            <Button fx:id="btnBestellungen" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Bestellungen" textAlignment="CENTER" textFill="WHITE">
+               </font>
+            </Button>
+            <Button fx:id="btnBestellungen" mnemonicParsing="false" onAction="#bestellungScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Bestellungen" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
-               </font></Button>
-            <Button fx:id="btnKunden" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Kunden" textAlignment="CENTER" textFill="WHITE">
+               </font>
+            </Button>
+            <Button fx:id="btnKunden" mnemonicParsing="false" onAction="#kundenScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Kunden" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
-               </font></Button>
-            <Button fx:id="btnMenus" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Menüs" textAlignment="CENTER" textFill="WHITE">
+               </font>
+            </Button>
+            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#menuesScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Einstellungen" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
-               </font></Button>
-            <Button fx:id="btnQuit" mnemonicParsing="false" prefHeight="65.0" prefWidth="311.0" stylesheets="@style.css" text="Beenden" textAlignment="CENTER" textFill="WHITE">
+               </font>
+            </Button>
+            <Button fx:id="btnQuit" mnemonicParsing="false" onAction="#exitProgram" prefHeight="65.0" prefWidth="311.0" stylesheets="@style.css" text="Beenden" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
-               </font></Button>
+               </font>
+            </Button>
          </children>
          <effect>
             <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.0175" spread="0.32" width="18.07" />
          </effect>
       </VBox>
-      <Label alignment="CENTER" layoutX="319.0" layoutY="51.0" prefHeight="65.0" prefWidth="751.0" text="Restaurant Orders" textFill="#5667fd">
+      <Label alignment="CENTER" layoutX="255.0" layoutY="51.0" prefHeight="65.0" prefWidth="815.0" text="AmaGon" textFill="#5667fd">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <VBox fx:id="pnItems" layoutX="319.0" layoutY="251.0" prefHeight="342.0" prefWidth="751.0" style="-fx-background-color: #ffff;">
+      <VBox fx:id="pnItems" layoutX="255.0" layoutY="188.0" prefHeight="404.0" prefWidth="815.0" style="-fx-background-color: #ffff;">
          <children>
-            <HBox alignment="CENTER" prefHeight="185.0" prefWidth="751.0">
+            <HBox alignment="CENTER" prefHeight="292.0" prefWidth="751.0">
                <children>
                   <VBox prefHeight="185.0" prefWidth="245.0">
                      <children>
-                        <Label fx:id="lbAnzahlBestellungen" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="Label" textFill="#5667fd">
+                        <Label fx:id="lbAnzahlBestellungen" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="7943" textFill="#5667fd">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -80,7 +85,7 @@
                   </VBox>
                   <VBox prefHeight="185.0" prefWidth="245.0">
                      <children>
-                        <Label fx:id="lbRegKunden" alignment="CENTER" prefHeight="54.0" prefWidth="335.0" text="Label" textFill="#5667fd">
+                        <Label fx:id="lbRegKunden" alignment="CENTER" prefHeight="54.0" prefWidth="335.0" text="4799" textFill="#5667fd">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -92,40 +97,26 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="185.0" prefWidth="245.0">
-                     <children>
-                        <Label fx:id="lbAnzahlMenus" alignment="CENTER" prefHeight="54.0" prefWidth="311.0" text="Label" textFill="#5667fd">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="313.0" text="Verfügbare Menüs" textFill="#5667fd">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
                </children>
             </HBox>
-            <VBox prefHeight="100.0" prefWidth="129.0">
+            <VBox alignment="CENTER" prefHeight="313.0" prefWidth="815.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="581.0" spacing="10.0">
+                  <VBox alignment="CENTER" prefHeight="176.0" prefWidth="815.0" spacing="10.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="Datenbank" textFill="#5667fd">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="Status" textFill="#5667fd">
+                        <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" textFill="#5667fd">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                            <children>
-                              <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Datenbank verbinden" textAlignment="CENTER" textFill="WHITE" />
-                              <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Datenbank trennen" textAlignment="CENTER" textFill="WHITE" />
+                              <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Verbinden" textAlignment="CENTER" textFill="WHITE" />
+                              <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
                            </children>
                         </HBox>
                      </children>

@@ -1,4 +1,4 @@
-module app.restaurantorders {
+module app.amagon {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -9,6 +9,8 @@ module app.restaurantorders {
     requires eu.hansolo.tilesfx;
     requires com.microsoft.sqlserver.jdbc;
     requires java.sql;
-    exports app.restaurantorders;
-    opens app.restaurantorders to javafx.fxml;
+    requires java.persistence;
+    requires jakarta.persistence;
+    exports app.amagon;
+    opens app.amagon to javafx.fxml;
 }
