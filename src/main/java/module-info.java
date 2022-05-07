@@ -8,7 +8,7 @@ module app.amagon {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.microsoft.sqlserver.jdbc;
-    requires java.sql;
+    //requires java.sql;
     requires java.persistence;
     requires jakarta.persistence;
     exports app.amagon;
