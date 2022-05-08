@@ -15,35 +15,31 @@ public class DBUtil {
     private static ResultSet rs;
     private static Statement statement;
 
+    private static String dbHost = "localhost";
+    private static String dbPort = "1433";
+    private static String dbName = "DB2_Projekt";
+    private static String dbUser = "robert";
+    private static String dbPass = "robert1324";
+
     private List<Customer> customerList;
 
     /*private static EntityManager entityManager;*/
 
-    public DBUtil() throws SQLException, ClassNotFoundException {
-
-        String dbHost = "localhost";
-        String dbPort = "1433";
-        String dbName = "DB2_Projekt";
-        String dbUser = "robert";
-        String dbPass = "robert1324";
-
-        connectionURL="jdbc:sqlserver://"+
+    public static void dbConnect() throws SQLException, ClassNotFoundException{
+        connectionURL ="jdbc:sqlserver://"+
                 dbHost +":"+ dbPort +";"+"databaseName="+ dbName +";"+
                 "user="+ dbUser +";"+
                 "password="+ dbPass +";"+"encrypt=false;trustServerCertificate=true;";
-    }
-    public static void dbConnect() throws SQLException, ClassNotFoundException{
         try{
             Class.forName(JDBC_DRIVER);
         }catch(ClassNotFoundException e){
-            System.out.println("Wo ist dein MySQL JDBC Driver?");
+            System.out.println("SQL Server JDBC Driver fehlt");
             e.printStackTrace();
             throw e;
         }
         try{
             db_connection = DriverManager.getConnection(connectionURL);
         }catch (SQLException e){
-            System.out.println("Verbindung fehlgeschlagen!");
             e.printStackTrace();
             throw e;
         }
@@ -52,10 +48,14 @@ public class DBUtil {
         try {
             if (db_connection != null && !db_connection.isClosed()){
                 db_connection.close();
+                db_connection = null;
             }
         }catch (Exception e){
             throw e;
         }
+    }
+    public static Connection getConnection(){
+        return db_connection;
     }
     public static void dbExecuteQuery(String sqlStatement) throws SQLException, ClassNotFoundException{
         try{
@@ -100,11 +100,9 @@ public class DBUtil {
 
         }
     }
-
     public void initData() throws SQLException {
         getCustomerData();
     }
-
     private void getCustomerData() throws SQLException {
         try{
             if (!db_connection.isClosed()) {
@@ -150,5 +148,45 @@ public class DBUtil {
         }
     }
 
+    public static int getTotalCustomers() throws SQLException {
+        int total = 0;
+        try {
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("select [amagon].[getTotalCustomers]() as total");
+                rs = p_stmt.executeQuery();
+                while(rs.next()){
+                    System.out.println(rs.getInt(rs.findColumn("total")));
+                    total += rs.getInt(rs.findColumn("total"));
+                }
 
+                //
+            } else {
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        } catch (SQLException e) {
+            System.out.println("Problem beim Ausfuehren von Query.");
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                } catch (Exception e) {
+                }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return total;
+    }
 }

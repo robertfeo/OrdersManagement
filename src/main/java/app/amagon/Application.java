@@ -15,7 +15,7 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-view.fxml")));
         Scene scene = new Scene(root);
-        stage.setTitle("Restaurant Orders");
+        stage.setTitle("AmaGon");
         stage.initStyle(StageStyle.UNDECORATED);
         root.setOnMousePressed(evt ->{
             x = evt.getSceneX();

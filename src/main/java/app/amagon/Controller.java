@@ -20,6 +20,8 @@ public class Controller {
     @FXML
     private Label lbStatus;
     @FXML
+    private Label lbRegKunden;
+    @FXML
     private Button btnDbDisconnect;
     @FXML
     private Button btnDbConnect;
@@ -27,12 +29,14 @@ public class Controller {
     private AnchorPane scenePane;
     private Stage stage;
     private Scene scene;
-    private static DBUtil dbUtils;
+
+    public Controller(){
+        lbRegKunden = new Label();
+    }
 
     @FXML
     protected void connectToDatabase() throws SQLException, ClassNotFoundException {
-        dbUtils = new DBUtil();
-        dbUtils.dbConnect();
+        DBUtil.dbConnect();
         lbStatus.setTextFill(Color.color(0, 0.5, 0.2));
         lbStatus.setText("Verbindung erfolgreich hergestellt.");
         btnDbConnect.setDisable(true);
@@ -40,19 +44,25 @@ public class Controller {
     }
 
     @FXML
-    protected void disconnectFromDatabase() throws SQLException, ClassNotFoundException {
-        dbUtils.dbDisconnect();
+    protected void disconnectFromDatabase() throws SQLException {
+        DBUtil.dbDisconnect();
         lbStatus.setTextFill(Color.color(0.7, 0.1, 0.1));
         lbStatus.setText("Verbindung wurde getrennt.");
         btnDbDisconnect.setDisable(true);
         btnDbConnect.setDisable(false);
     }
 
-    public void mainScene(ActionEvent event) throws IOException {
+    public void mainScene(ActionEvent event) throws IOException, SQLException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main-view.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        lbRegKunden.setText(String.valueOf(DBUtil.getTotalCustomers()));
+        if (DBUtil.getConnection() == null) {
+            System.out.println("nicht verbunden");
+        }else {
+            System.out.println("verbunden");
+        }
         stage.show();
     }
 
@@ -72,7 +82,7 @@ public class Controller {
         stage.show();
     }
 
-    public void menuesScene(ActionEvent event) throws IOException {
+    public void settingsScene(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/settings.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
