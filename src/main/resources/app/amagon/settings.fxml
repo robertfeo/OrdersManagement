@@ -3,9 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,6 +25,9 @@
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
+                     <effect>
+                        <Reflection topOpacity="0.2" />
+                     </effect>
                         </ImageView>
                     </children>
                     <padding>
@@ -62,40 +64,41 @@
                 <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.0175" spread="0.32" width="18.07" />
             </effect>
         </VBox>
-        <Label alignment="CENTER" layoutX="319.0" layoutY="14.0" prefHeight="57.0" prefWidth="751.0" text="Restaurant Orders" textFill="#5667fd">
-            <font>
-                <Font size="36.0" />
-            </font>
-        </Label>
-        <VBox fx:id="pnItems" layoutX="319.0" layoutY="147.0" prefHeight="446.0" prefWidth="751.0" style="-fx-background-color: #ffff;">
-            <children>
-                <VBox alignment="CENTER" prefHeight="382.0" prefWidth="751.0" spacing="10.0">
-                    <children>
-                        <HBox alignment="CENTER" prefHeight="116.0" prefWidth="751.0" spacing="25.0">
-                            <children>
-                                <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
-                            </children>
+      <VBox fx:id="pnItems" layoutX="308.0" layoutY="163.0" prefHeight="134.0" prefWidth="708.0" style="-fx-background-color: #ffff;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="815.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="211.0" prefWidth="815.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="Datenbankverbindung" textFill="#5667fd">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="N/A" textFill="#5667fd">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="41.0" prefWidth="708.0" spacing="25.0">
+                           <children>
+                              <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Verbinden" textAlignment="CENTER" textFill="WHITE" />
+                              <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
                         </HBox>
-                        <HBox prefHeight="356.0" prefWidth="751.0">
-                            <children>
-                                <TableView prefHeight="100.0" prefWidth="365.0">
-                                    <columns>
-                                        <TableColumn prefWidth="75.0" text="C1" />
-                                        <TableColumn prefWidth="75.0" text="C2" />
-                                    </columns>
-                                </TableView>
-                                <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-                <VBox prefHeight="100.0" prefWidth="129.0" />
-            </children>
-        </VBox>
-        <Label alignment="CENTER" layoutX="341.0" layoutY="71.0" prefHeight="17.0" prefWidth="708.0" text="Menüs" textFill="#5667fd">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Label layoutX="247.0" layoutY="24.0" prefHeight="75.0" prefWidth="828.0" text="Einstellungen" textFill="#5667fd">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <padding>
+            <Insets left="75.0" />
+         </padding>
+      </Label>
     </children>
 </AnchorPane>

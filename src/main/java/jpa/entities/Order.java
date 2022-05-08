@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Order {
@@ -22,7 +23,7 @@ public class Order {
     private Customer customer;
 
     @OneToMany(mappedBy = "orderByOrderId")
-    private Collection<OrderItem> orderItemsByOrderId;
+    private List<OrderItem> orderItemsByOrderId;
 
     public int getOrderId() {
         return orderId;
@@ -82,7 +83,7 @@ public class Order {
         return orderItemsByOrderId;
     }
 
-    public void setOrderItemsByOrderId(Collection<OrderItem> orderItemsByOrderId) {
+    public void setOrderItemsByOrderId(List<OrderItem> orderItemsByOrderId) {
         this.orderItemsByOrderId = orderItemsByOrderId;
     }
 }

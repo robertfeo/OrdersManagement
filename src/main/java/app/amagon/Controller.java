@@ -27,12 +27,12 @@ public class Controller {
     private AnchorPane scenePane;
     private Stage stage;
     private Scene scene;
-    private DBUtil dbUtils;
+    private static DBUtil dbUtils;
 
     @FXML
     protected void connectToDatabase() throws SQLException, ClassNotFoundException {
-        this.dbUtils = new DBUtil();
-        this.dbUtils.dbConnect();
+        dbUtils = new DBUtil();
+        dbUtils.dbConnect();
         lbStatus.setTextFill(Color.color(0, 0.5, 0.2));
         lbStatus.setText("Verbindung erfolgreich hergestellt.");
         btnDbConnect.setDisable(true);
@@ -81,12 +81,6 @@ public class Controller {
     }
 
     public void exitProgram(ActionEvent event) throws IOException {
-        final Node source = (Node)event.getSource();
-        final Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
-    }
-
-    public void check(ActionEvent event) throws IOException {
         final Node source = (Node)event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         stage.close();

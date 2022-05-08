@@ -33,6 +33,8 @@ public class Customer {
         this.setCity(city);
     }
 
+    public Customer() {}
+
     public int getCustomerId() {
         return customerId;
     }

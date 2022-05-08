@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,6 +27,9 @@
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
+                     <effect>
+                        <Reflection topOpacity="0.2" />
+                     </effect>
                         </ImageView>
                     </children>
                     <padding>
@@ -62,11 +66,6 @@
                 <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.0175" spread="0.32" width="18.07" />
             </effect>
         </VBox>
-        <Label alignment="CENTER" layoutX="319.0" layoutY="51.0" prefHeight="65.0" prefWidth="751.0" text="AmaGon - Bestellungen" textFill="#5667fd">
-            <font>
-                <Font size="36.0" />
-            </font>
-        </Label>
         <VBox fx:id="pnItems" layoutX="319.0" layoutY="147.0" prefHeight="446.0" prefWidth="751.0" style="-fx-background-color: #ffff;">
             <children>
                   <VBox alignment="CENTER" prefHeight="382.0" prefWidth="751.0" spacing="10.0">
@@ -92,5 +91,13 @@
                 <VBox prefHeight="100.0" prefWidth="129.0" />
             </children>
         </VBox>
+      <Label layoutX="246.0" layoutY="24.0" prefHeight="75.0" prefWidth="829.0" text="Bestellungen" textFill="#5667fd">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <padding>
+            <Insets left="75.0" />
+         </padding>
+      </Label>
     </children>
 </AnchorPane>
