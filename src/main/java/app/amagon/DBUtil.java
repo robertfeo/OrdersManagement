@@ -1,5 +1,6 @@
 package app.amagon;
 
+import javafx.collections.ObservableList;
 import jpa.entities.Customer;
 
 import javax.persistence.EntityManager;
@@ -21,7 +22,7 @@ public class DBUtil {
     private static String dbUser = "robert";
     private static String dbPass = "robert1324";
 
-    private List<Customer> customerList;
+    private ObservableList<Customer> customerList;
 
     /*private static EntityManager entityManager;*/
 
@@ -148,6 +149,10 @@ public class DBUtil {
         }
     }
 
+    public static ObservableList<Customer> getCustomerList(){
+        return this.customerList;
+    }
+
     public static int getTotalCustomers() throws SQLException {
         int total = 0;
         try {
@@ -155,7 +160,6 @@ public class DBUtil {
                 p_stmt = db_connection.prepareStatement("select [amagon].[getTotalCustomers]() as total");
                 rs = p_stmt.executeQuery();
                 while(rs.next()){
-                    System.out.println(rs.getInt(rs.findColumn("total")));
                     total = rs.getInt(rs.findColumn("total"));
                 }
             } else {

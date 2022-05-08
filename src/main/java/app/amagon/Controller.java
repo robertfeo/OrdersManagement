@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    double x,y;
     public Label lbAnzahlBestellungen;
     public Button btnCustomerAdd;
     public Button btnCustomerRefresh;
@@ -49,7 +51,7 @@ public class Controller implements Initializable {
         btnDbDisconnect.setDisable(false);
     }
 
-    @FXML
+    @FXML   //  USED IN BUTTON TO CONNECT TO DATABASE
     protected void disconnectFromDatabase() throws SQLException {
         DBUtil.dbDisconnect();
         lbStatus.setTextFill(Color.color(0.7, 0.1, 0.1));
@@ -58,39 +60,76 @@ public class Controller implements Initializable {
         btnDbConnect.setDisable(false);
     }
 
-    public void mainScene(ActionEvent event) throws IOException, SQLException {
+    //  CHANGE TO MAIN SCENE
+    public void mainScene(@NotNull ActionEvent event) throws IOException, SQLException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        scene.getRoot().setOnMousePressed(evt ->{
+            x = evt.getSceneX();
+            y = evt.getSceneY();
+        });
+        scene.getRoot().setOnMouseDragged(evt ->{
+            stage.setX(evt.getScreenX() - x);
+            stage.setY(evt.getScreenY() - y);
+        });
         stage.show();
     }
 
-    public void bestellungScene(ActionEvent event) throws IOException {
+    //  CHANGE TO ORDER SCENE
+    public void bestellungScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/bestellungen.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        scene.getRoot().setOnMousePressed(evt ->{
+            x = evt.getSceneX();
+            y = evt.getSceneY();
+        });
+        scene.getRoot().setOnMouseDragged(evt ->{
+            stage.setX(evt.getScreenX() - x);
+            stage.setY(evt.getScreenY() - y);
+        });
         stage.show();
     }
 
-    public void kundenScene(ActionEvent event) throws IOException {
+    //  CHANGE TO CUSTOMERS SCENE
+    public void kundenScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/kunden.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        scene.getRoot().setOnMousePressed(evt ->{
+            x = evt.getSceneX();
+            y = evt.getSceneY();
+        });
+        scene.getRoot().setOnMouseDragged(evt ->{
+            stage.setX(evt.getScreenX() - x);
+            stage.setY(evt.getScreenY() - y);
+        });
         stage.show();
     }
 
-    public void productsScene(ActionEvent event) throws IOException {
+    //  CHANGE TO PRODUCTS SCENE
+    public void productsScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/produkte.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        scene.getRoot().setOnMousePressed(evt ->{
+            x = evt.getSceneX();
+            y = evt.getSceneY();
+        });
+        scene.getRoot().setOnMouseDragged(evt ->{
+            stage.setX(evt.getScreenX() - x);
+            stage.setY(evt.getScreenY() - y);
+        });
         stage.show();
     }
 
-    public void exitProgram(ActionEvent event) throws IOException, SQLException {
+    //  EXIT THE PROGRAM
+    public void exitProgram(@NotNull ActionEvent event) throws IOException, SQLException {
         final Node source = (Node)event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         DBUtil.dbDisconnect();
@@ -108,9 +147,13 @@ public class Controller implements Initializable {
     public void deleteCustomerFromDatabase(ActionEvent actionEvent) {
     }
 
-    public void refreshCustomerList(ActionEvent actionEvent) {
+    public void refreshCustomerTable(ActionEvent actionEvent) {
+        customerTable.getColumns().add(DBUtil.getCustomerList());
     }
 
-    public void refreshDataMain(ActionEvent actionEvent) {
+    public void refreshDataMain(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        lbRegKunden.setText(Integer.toString(DBUtil.getTotalCustomers()));
+        DBUtil.dbDisconnect();
     }
 }

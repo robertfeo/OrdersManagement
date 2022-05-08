@@ -19,15 +19,6 @@ public class Application extends javafx.application.Application {
         DBUtil.dbConnect();
         stage.setTitle("AmaGon");
         stage.initStyle(StageStyle.UNDECORATED);
-
-        root.setOnMousePressed(evt ->{
-            x = evt.getSceneX();
-            y = evt.getSceneY();
-        });
-        root.setOnMouseDragged(evt ->{
-            stage.setX(evt.getScreenX() - x);
-            stage.setY(evt.getScreenY() - y);
-        });
         stage.setScene(scene);
         stage.show();
     }

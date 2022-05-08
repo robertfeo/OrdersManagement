@@ -49,7 +49,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Einstellungen" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Produkte" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -75,7 +75,7 @@
                <children>
                   <VBox prefHeight="150.0" prefWidth="245.0">
                      <children>
-                        <Label fx:id="lbAnzahlBestellungen" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="7943" textFill="#5667fd">
+                        <Label fx:id="lbAnzahlBestellungen" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="-" textFill="#5667fd">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -89,7 +89,7 @@
                   </VBox>
                   <VBox prefHeight="150.0" prefWidth="245.0">
                      <children>
-                        <Label fx:id="lbRegKunden" alignment="CENTER" prefHeight="54.0" prefWidth="335.0" text="4799" textFill="#5667fd">
+                        <Label fx:id="lbRegKunden" alignment="CENTER" prefHeight="54.0" prefWidth="335.0" text="-" textFill="#5667fd">
                            <font>
                               <Font size="24.0" />
                            </font>

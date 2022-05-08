@@ -11,6 +11,7 @@ module app.amagon {
     //requires java.sql;
     requires java.persistence;
     requires jakarta.persistence;
+    requires org.jetbrains.annotations;
     exports app.amagon;
     opens app.amagon to javafx.fxml;
 }

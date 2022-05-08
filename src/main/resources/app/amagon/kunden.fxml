@@ -163,7 +163,7 @@
                         </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="688.0">
                      <children>
-                                <Button fx:id="btnCustomerRefresh" alignment="CENTER" mnemonicParsing="false" onAction="#refreshCustomerList" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="btnCustomerRefresh" alignment="CENTER" mnemonicParsing="false" onAction="#refreshCustomerTable" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin></Button>

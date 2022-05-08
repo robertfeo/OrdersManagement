@@ -39,6 +39,7 @@
     <orderEntry type="library" name="Gradle: com.microsoft.sqlserver:mssql-jdbc:10.2.0.jre17" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-entitymanager:5.6.8.Final" level="project" />
     <orderEntry type="library" name="Gradle: javax.persistence:javax.persistence-api:2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:20.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.8.2" level="project" />
     <orderEntry type="library" name="Gradle: org.kordamp.ikonli:ikonli-core:12.3.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.1.2.Final" level="project" />
