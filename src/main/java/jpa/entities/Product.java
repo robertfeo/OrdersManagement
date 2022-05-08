@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -11,21 +12,17 @@ public class Product {
     @Id
     @Column(name = "product_id", nullable = false)
     private int productId;
-
     @Basic
     @Column(name = "product_name", nullable = false, length = 255)
     private String productName;
-
     @Basic
     @Column(name = "category", nullable = false, length = 255)
     private String category;
-
     @Basic
     @Column(name = "price", nullable = false, precision = 2)
     private BigDecimal price;
-
     @OneToMany(mappedBy = "productByProductId")
-    private Collection<OrderItem> orderItemsByProductId;
+    private List<OrderItem> orderItemsByProductId;
 
     public int getProductId() {
         return productId;
@@ -83,11 +80,11 @@ public class Product {
         return result;
     }
 
-    public Collection<OrderItem> getOrderItemsByProductId() {
+    public List<OrderItem> getOrderItemsByProductId() {
         return orderItemsByProductId;
     }
 
-    public void setOrderItemsByProductId(Collection<OrderItem> orderItemsByProductId) {
+    public void setOrderItemsByProductId(List<OrderItem> orderItemsByProductId) {
         this.orderItemsByProductId = orderItemsByProductId;
     }
 }

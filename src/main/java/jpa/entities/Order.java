@@ -19,7 +19,8 @@ public class Order {
     private int customerId;
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    private Customer customerByCustomerId;
+    private Customer customer;
+
     @OneToMany(mappedBy = "orderByOrderId")
     private Collection<OrderItem> orderItemsByOrderId;
 
@@ -69,12 +70,12 @@ public class Order {
         return result;
     }
 
-    public Customer getCustomerByCustomerId() {
-        return customerByCustomerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerByCustomerId(Customer customerByCustomerId) {
-        this.customerByCustomerId = customerByCustomerId;
+    public void setCustomer(Customer customerByCustomerId) {
+        this.customer = customerByCustomerId;
     }
 
     public Collection<OrderItem> getOrderItemsByOrderId() {

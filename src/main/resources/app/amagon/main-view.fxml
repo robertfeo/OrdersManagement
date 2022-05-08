@@ -19,7 +19,7 @@
                <children>
                   <ImageView fitHeight="110.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/logo.png" />
+                        <Image url="@images/8707283_shopping_basket_bag_icon.png" />
                      </image>
                      <HBox.margin>
                         <Insets />

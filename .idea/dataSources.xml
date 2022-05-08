@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Datenbanken 2 SQL Server - @134.108.190.89" uuid="fdb2e433-f3d7-4587-b764-62e473efb86d">
+    <data-source source="LOCAL" name="DB2 Lab SQL Server - @134.108.190.89" uuid="fdb2e433-f3d7-4587-b764-62e473efb86d">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
       <jdbc-url>jdbc:sqlserver://134.108.190.89:1433;encrypt=true;trustServerCertificate=true;database=SWB_DB2_Projekt;</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="MySQL Local Instance" uuid="90710881-b4df-423e-ba26-864ef6b0a591">
+    <data-source source="LOCAL" name="Local MySQL" uuid="90710881-b4df-423e-ba26-864ef6b0a591">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Microsoft SQL Server LocalDB" uuid="c32857db-83d7-4b8c-b8fc-17a75fa5c42b">
+    <data-source source="LOCAL" name="Local SQL Server (alt)" uuid="8b4b40db-531a-46b8-8d49-87b72a634141">
       <driver-ref>sqlserver.localdb.jtds</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>net.sourceforge.jtds.jdbc.Driver</jdbc-driver>
@@ -23,6 +23,13 @@
       <jdbc-additional-properties>
         <property name="LOCAL_DB_INSTANCE" value="Local" />
       </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="DB2_Projekt@localhost" uuid="e4bffb6b-937b-4839-973b-9e450f3187c5">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost;database=DB2_Projekt</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

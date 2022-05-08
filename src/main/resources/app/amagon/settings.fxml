@@ -15,13 +15,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1075.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.amagon.Controller">
     <children>
-        <VBox prefHeight="699.0" prefWidth="311.0" style="-fx-background-color: #5667FD;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="599.0" prefWidth="245.0" style="-fx-background-color: #5667FD;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <ImageView fitHeight="110.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/logo.png" />
+                                <Image url="@images/8707283_shopping_basket_bag_icon.png" />
                             </image>
                             <HBox.margin>
                                 <Insets />
@@ -47,7 +47,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnMenus" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Menüs" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="btnMenus" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Einstellungen" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

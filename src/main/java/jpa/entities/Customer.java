@@ -2,7 +2,7 @@ package jpa.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -22,8 +22,16 @@ public class Customer {
     @Basic
     @Column(name = "city", nullable = false, length = 255)
     private String city;
-    @OneToMany(mappedBy = "customerByCustomerId")
-    private Collection<Order> ordersByCustomerId;
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
+
+    public Customer(int customerId,String surname,String name,String address,String city) {
+        this.setCustomerId(customerId);
+        this.setSurname(surname);
+        this.setName(name);
+        this.setAddress(address);
+        this.setCity(city);
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -91,11 +99,11 @@ public class Customer {
         return result;
     }
 
-    public Collection<Order> getOrdersByCustomerId() {
-        return ordersByCustomerId;
+    public List<Order> getOrdersByCustomerId() {
+        return orders;
     }
 
-    public void setOrdersByCustomerId(Collection<Order> ordersByCustomerId) {
-        this.ordersByCustomerId = ordersByCustomerId;
+    public void setOrdersByCustomerId(List<Order> ordersList) {
+        this.orders = ordersList;
     }
 }

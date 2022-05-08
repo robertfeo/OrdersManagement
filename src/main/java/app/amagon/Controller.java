@@ -40,7 +40,7 @@ public class Controller {
     }
 
     @FXML
-    protected void disconnectFromDatabase() throws SQLException {
+    protected void disconnectFromDatabase() throws SQLException, ClassNotFoundException {
         dbUtils.dbDisconnect();
         lbStatus.setTextFill(Color.color(0.7, 0.1, 0.1));
         lbStatus.setText("Verbindung wurde getrennt.");
