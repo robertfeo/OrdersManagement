@@ -61,7 +61,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnMenus" mnemonicParsing="false" onAction="#settingsScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Einstellungen" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="btnMenus" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Produkte" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -82,7 +82,7 @@
                     <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="688.0" spacing="25.0">
                      <children>
-                        <Button fx:id="btnCustomerAdd" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Hinzufügen" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="btnCustomerAdd" alignment="CENTER" mnemonicParsing="false" onAction="#addCustomerToDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Hinzufügen" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets bottom="-60.0" />
                            </HBox.margin>
@@ -132,7 +132,7 @@
                   </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="688.0" spacing="25.0">
                             <children>
-                        <Button fx:id="btnCustomerDelete" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Löschen" textAlignment="CENTER" textFill="WHITE" />
+                        <Button fx:id="btnCustomerDelete" alignment="CENTER" mnemonicParsing="false" onAction="#deleteCustomerFromDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Löschen" textAlignment="CENTER" textFill="WHITE" />
                         <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="CENTER" wrappingWidth="16.0">
                            <font>
                               <Font size="14.0" />
@@ -163,7 +163,7 @@
                         </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="688.0">
                      <children>
-                                <Button fx:id="btnCustomerRefresh" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="btnCustomerRefresh" alignment="CENTER" mnemonicParsing="false" onAction="#refreshCustomerList" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin></Button>

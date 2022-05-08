@@ -49,7 +49,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnMenus" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Einstellungen" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="btnMenus" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Produkte" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -66,33 +66,10 @@
         </VBox>
       <VBox fx:id="pnItems" layoutX="308.0" layoutY="163.0" prefHeight="134.0" prefWidth="708.0" style="-fx-background-color: #ffff;">
          <children>
-            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="815.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="211.0" prefWidth="815.0" spacing="10.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" text="Datenbankverbindung" textFill="#5667fd">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="999.0" textFill="#5667fd">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" prefHeight="41.0" prefWidth="708.0" spacing="25.0">
-                           <children>
-                              <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Verbinden" textAlignment="CENTER" textFill="WHITE" />
-                              <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="815.0" />
          </children>
       </VBox>
-      <Label layoutX="247.0" layoutY="24.0" prefHeight="75.0" prefWidth="828.0" text="Einstellungen" textFill="#5667fd">
+      <Label layoutX="247.0" layoutY="24.0" prefHeight="75.0" prefWidth="828.0" text="Produkte" textFill="#5667fd">
          <font>
             <Font size="36.0" />
          </font>

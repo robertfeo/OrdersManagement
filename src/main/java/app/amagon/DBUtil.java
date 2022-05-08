@@ -156,10 +156,8 @@ public class DBUtil {
                 rs = p_stmt.executeQuery();
                 while(rs.next()){
                     System.out.println(rs.getInt(rs.findColumn("total")));
-                    total += rs.getInt(rs.findColumn("total"));
+                    total = rs.getInt(rs.findColumn("total"));
                 }
-
-                //
             } else {
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
             }

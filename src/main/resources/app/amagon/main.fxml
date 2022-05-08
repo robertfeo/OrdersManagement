@@ -69,9 +69,9 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <VBox fx:id="pnItems" alignment="CENTER" layoutX="255.0" layoutY="188.0" prefHeight="267.0" prefWidth="815.0" style="-fx-background-color: #ffff;">
+      <VBox fx:id="pnItems" alignment="CENTER" layoutX="255.0" layoutY="188.0" prefHeight="215.0" prefWidth="815.0" style="-fx-background-color: #ffff;">
          <children>
-            <HBox alignment="CENTER" prefHeight="120.0" prefWidth="815.0">
+            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="815.0">
                <children>
                   <VBox prefHeight="150.0" prefWidth="245.0">
                      <children>

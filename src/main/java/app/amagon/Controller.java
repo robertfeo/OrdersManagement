@@ -3,20 +3,28 @@ package app.amagon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
+    public Label lbAnzahlBestellungen;
+    public Button btnCustomerAdd;
+    public Button btnCustomerRefresh;
+    public TableView customerTable;
     @FXML
     private Label lbStatus;
     @FXML
@@ -26,13 +34,11 @@ public class Controller {
     @FXML
     private Button btnDbConnect;
     @FXML
-    private AnchorPane scenePane;
+    private AnchorPane rootPane;
     private Stage stage;
     private Scene scene;
-
-    public Controller(){
-        lbRegKunden = new Label();
-    }
+    
+    
 
     @FXML
     protected void connectToDatabase() throws SQLException, ClassNotFoundException {
@@ -53,16 +59,10 @@ public class Controller {
     }
 
     public void mainScene(ActionEvent event) throws IOException, SQLException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main-view.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        lbRegKunden.setText(String.valueOf(DBUtil.getTotalCustomers()));
-        if (DBUtil.getConnection() == null) {
-            System.out.println("nicht verbunden");
-        }else {
-            System.out.println("verbunden");
-        }
         stage.show();
     }
 
@@ -82,17 +82,35 @@ public class Controller {
         stage.show();
     }
 
-    public void settingsScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/settings.fxml")));
+    public void productsScene(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/produkte.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void exitProgram(ActionEvent event) throws IOException {
+    public void exitProgram(ActionEvent event) throws IOException, SQLException {
         final Node source = (Node)event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
+        DBUtil.dbDisconnect();
         stage.close();
+    }
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+
+    }
+
+    public void addCustomerToDatabase(ActionEvent actionEvent) {
+        
+    }
+
+    public void deleteCustomerFromDatabase(ActionEvent actionEvent) {
+    }
+
+    public void refreshCustomerList(ActionEvent actionEvent) {
+    }
+
+    public void refreshDataMain(ActionEvent actionEvent) {
     }
 }
