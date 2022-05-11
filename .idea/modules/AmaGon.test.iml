@@ -19,14 +19,14 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="AmaGon.main" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-web:win:11.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-media:11.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-media:win:11.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.dlsc.formsfx:formsfx-core:11.5.0" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:19-ea+5" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:19-ea+5" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-web:win:11.0.2" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:19-ea+5" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:19-ea+5" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-media:11.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-media:win:11.0.2" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:19-ea+5" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:19-ea+5" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:19-ea+5" level="project" />

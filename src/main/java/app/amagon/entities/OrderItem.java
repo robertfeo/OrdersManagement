@@ -1,4 +1,4 @@
-package jpa.entities;
+package app.amagon.entities;
 
 import jakarta.persistence.*;
 

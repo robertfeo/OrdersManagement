@@ -9,10 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -22,11 +25,16 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    public TableColumn<Customer,Integer> tbCustomerID;
+    public TableColumn<Customer,String>  tbCustomerSurname;
+    public TableColumn<Customer,String> tbCustomerName;
+    public TableColumn<Customer,String> tbCustomerAddress;
+    public TableColumn<Customer,String> tbCustomerCity;
     double x,y;
     public Label lbAnzahlBestellungen;
     public Button btnCustomerAdd;
     public Button btnCustomerRefresh;
-    public TableView customerTable;
+    public TableView<Customer> customerTable;
     @FXML
     private Label lbStatus;
     @FXML
@@ -39,8 +47,6 @@ public class Controller implements Initializable {
     private AnchorPane rootPane;
     private Stage stage;
     private Scene scene;
-    
-    
 
     @FXML
     protected void connectToDatabase() throws SQLException, ClassNotFoundException {
@@ -147,8 +153,10 @@ public class Controller implements Initializable {
     public void deleteCustomerFromDatabase(ActionEvent actionEvent) {
     }
 
-    public void refreshCustomerTable(ActionEvent actionEvent) {
-        customerTable.getColumns().add(DBUtil.getCustomerList());
+    public void refreshCustomerTable(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        customerTable.setItems(DBUtil.getCustomerList());
+        DBUtil.dbDisconnect();
     }
 
     public void refreshDataMain(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {

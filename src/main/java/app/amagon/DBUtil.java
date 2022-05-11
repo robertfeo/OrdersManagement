@@ -1,12 +1,10 @@
 package app.amagon;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jpa.entities.Customer;
+import app.amagon.entities.Customer;
 
-import javax.persistence.EntityManager;
 import java.sql.*;
-import java.util.List;
-import java.util.Properties;
 
 public class DBUtil {
     private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -22,7 +20,7 @@ public class DBUtil {
     private static String dbUser = "robert";
     private static String dbPass = "robert1324";
 
-    private ObservableList<Customer> customerList;
+    private static ObservableList<Customer> customerList;
 
     /*private static EntityManager entityManager;*/
 
@@ -105,17 +103,20 @@ public class DBUtil {
         getCustomerData();
     }
     private void getCustomerData() throws SQLException {
+        customerList = FXCollections.observableArrayList();
         try{
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("select * from amagon.customer");
                 rs = p_stmt.executeQuery();
                 while (rs.next()) {
-                    this.customerList.add(new Customer(
+                    Customer customer = new Customer(
                             rs.getInt("customer_id"),
                             rs.getString("surname"),
                             rs.getString("name"),
                             rs.getString("address"),
-                            rs.getString("city")));
+                            rs.getString("city"));
+                    //customerList.add(customer);
+                    System.out.println(customer.toString());
                 }
             }
             else{
@@ -150,7 +151,7 @@ public class DBUtil {
     }
 
     public static ObservableList<Customer> getCustomerList(){
-        return this.customerList;
+        return customerList;
     }
 
     public static int getTotalCustomers() throws SQLException {

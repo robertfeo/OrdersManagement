@@ -1,9 +1,8 @@
-package jpa.entities;
+package app.amagon.entities;
 
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 @Entity

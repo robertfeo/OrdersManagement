@@ -1,4 +1,4 @@
-package jpa.entities;
+package app.amagon.entities;
 
 import jakarta.persistence.*;
 
@@ -107,5 +107,17 @@ public class Customer {
 
     public void setOrdersByCustomerId(List<Order> ordersList) {
         this.orders = ordersList;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", orders=" + orders +
+                '}';
     }
 }

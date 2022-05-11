@@ -32,7 +32,7 @@
                     <children>
                         <ImageView fitHeight="110.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/8707283_shopping_basket_bag_icon.png" />
+                                <Image url="@images/logo.png" />
                             </image>
                             <HBox.margin>
                                 <Insets />
@@ -46,22 +46,22 @@
                         <Insets bottom="35.0" top="35.0" />
                     </padding>
                 </HBox>
-                <Button fx:id="btnUebersicht" mnemonicParsing="false" onAction="#mainScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Übersicht" textAlignment="CENTER" textFill="WHITE">
+                <Button id="button-menu" fx:id="btnUebersicht" mnemonicParsing="false" onAction="#mainScene" prefHeight="65.0" prefWidth="312.0" styleClass="button-menu" stylesheets="@style.css" text="Übersicht" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnBestellungen" mnemonicParsing="false" onAction="#bestellungScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Bestellungen" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="btnBestellungen" mnemonicParsing="false" onAction="#bestellungScene" prefHeight="65.0" prefWidth="312.0" stylesheets="@style.css" text="Bestellungen" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnKunden" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Kunden" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="btnKunden" disable="true" mnemonicParsing="false" prefHeight="65.0" prefWidth="312.0" stylesheets="@style.css" text="Kunden" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnMenus" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" style="-fx-border-radius: 0;" stylesheets="@style.css" text="Produkte" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="btnMenus" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" stylesheets="@style.css" text="Produkte" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -149,11 +149,11 @@
                             <children>
                                 <TableView fx:id="customerTable" prefHeight="250.0" prefWidth="688.0">
                                     <columns>
-                                        <TableColumn prefWidth="75.0" text="ID" />
-                                        <TableColumn prefWidth="75.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="Vorname" />
-                              <TableColumn prefWidth="75.0" text="Adresse" />
-                              <TableColumn prefWidth="75.0" text="Stadt" />
+                                        <TableColumn fx:id="tbCustomerID" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="tbCustomerSurname" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="tbCustomerName" prefWidth="75.0" text="Vorname" />
+                              <TableColumn fx:id="tbCustomerAddress" prefWidth="75.0" text="Adresse" />
+                              <TableColumn fx:id="tbCustomerCity" prefWidth="75.0" text="Stadt" />
                                     </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

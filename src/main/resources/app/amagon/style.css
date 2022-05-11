@@ -1,15 +1,14 @@
 .button{
-    -fx-background-color: #5667fd;
+    -fx-background-color: rgba(86, 103, 253, 1.0);
 }
 
 .button:hover{
-    -fx-background-color: #8392ff;
+    -fx-background-color: rgba(131, 146, 255, 1.0);
 }
 
 .button:pressed{
-    -fx-background-color: #5667fd;
+    -fx-background-color: rgba(86, 103, 253, 1.0);
 }
-
 
 #rich-blue {
     -fx-background-color:
