@@ -1,5 +1,7 @@
 package app.amagon;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -24,12 +23,18 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller{
     public TableColumn<Customer,Integer> tbCustomerID;
     public TableColumn<Customer,String>  tbCustomerSurname;
     public TableColumn<Customer,String> tbCustomerName;
     public TableColumn<Customer,String> tbCustomerAddress;
     public TableColumn<Customer,String> tbCustomerCity;
+    public TextField txfDeleteByID;
+    public TextField txfSurname;
+    public TextField txfAddress;
+    public TextField txfName;
+    public TextField txfCity;
+    DBUtil db_utils = new DBUtil();
     double x,y;
     public Label lbAnzahlBestellungen;
     public Button btnCustomerAdd;
@@ -67,7 +72,7 @@ public class Controller implements Initializable {
     }
 
     //  CHANGE TO MAIN SCENE
-    public void mainScene(@NotNull ActionEvent event) throws IOException, SQLException {
+    public void mainScene(@NotNull ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -101,7 +106,7 @@ public class Controller implements Initializable {
     }
 
     //  CHANGE TO CUSTOMERS SCENE
-    public void kundenScene(@NotNull ActionEvent event) throws IOException {
+    public void kundenScene(@NotNull ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/kunden.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -117,7 +122,6 @@ public class Controller implements Initializable {
         stage.show();
     }
 
-    //  CHANGE TO PRODUCTS SCENE
     public void productsScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/produkte.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -134,32 +138,47 @@ public class Controller implements Initializable {
         stage.show();
     }
 
-    //  EXIT THE PROGRAM
-    public void exitProgram(@NotNull ActionEvent event) throws IOException, SQLException {
+    public void exitProgram(@NotNull ActionEvent event) throws SQLException {
         final Node source = (Node)event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         DBUtil.dbDisconnect();
         stage.close();
     }
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
 
-    }
-
-    public void addCustomerToDatabase(ActionEvent actionEvent) {
-        
-    }
-
-    public void deleteCustomerFromDatabase(ActionEvent actionEvent) {
-    }
-
-    public void refreshCustomerTable(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void addCustomerToDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
-        customerTable.setItems(DBUtil.getCustomerList());
+        try{
+            DBUtil.addCustomer(txfSurname.getText(),txfName.getText(),txfAddress.getText(),txfCity.getText());
+            this.refreshCustomerTable();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
         DBUtil.dbDisconnect();
     }
 
-    public void refreshDataMain(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void deleteCustomerFromDatabase() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        try{
+            DBUtil.deleteCustomerByID(txfDeleteByID.getText());
+            this.refreshCustomerTable();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        DBUtil.dbDisconnect();
+    }
+
+    public void refreshCustomerTable() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        tbCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        tbCustomerSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        tbCustomerName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        tbCustomerCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        customerTable.setItems(db_utils.getCustomerList());
+        DBUtil.dbDisconnect();
+    }
+
+    public void refreshDataMain() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         lbRegKunden.setText(Integer.toString(DBUtil.getTotalCustomers()));
         DBUtil.dbDisconnect();

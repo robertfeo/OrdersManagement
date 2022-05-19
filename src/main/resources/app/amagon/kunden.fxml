@@ -149,15 +149,15 @@
                             <children>
                                 <TableView fx:id="customerTable" prefHeight="250.0" prefWidth="688.0">
                                     <columns>
-                                        <TableColumn fx:id="tbCustomerID" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="tbCustomerSurname" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="tbCustomerName" prefWidth="75.0" text="Vorname" />
-                              <TableColumn fx:id="tbCustomerAddress" prefWidth="75.0" text="Adresse" />
-                              <TableColumn fx:id="tbCustomerCity" prefWidth="75.0" text="Stadt" />
+                                            <TableColumn fx:id="tbCustomerID" prefWidth="75.0" text="ID" />
+                                            <TableColumn fx:id="tbCustomerSurname" prefWidth="75.0" text="Name" />
+                                              <TableColumn fx:id="tbCustomerName" prefWidth="75.0" text="Vorname" />
+                                              <TableColumn fx:id="tbCustomerAddress" prefWidth="75.0" text="Adresse" />
+                                              <TableColumn fx:id="tbCustomerCity" prefWidth="75.0" text="Stadt" />
                                     </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
+                                   <columnResizePolicy>
+                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                   </columnResizePolicy>
                                 </TableView>
                             </children>
                         </HBox>

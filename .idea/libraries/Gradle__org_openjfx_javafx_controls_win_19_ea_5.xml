@@ -2,10 +2,12 @@
   <library name="Gradle: org.openjfx:javafx-controls:win:19-ea+5">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/19-ea+5/e00dac70e5e4b8c7e2fa94eab5e969124f37ef15/javafx-controls-19-ea+5-win.jar!/" />
+      <root url="jar://C:/Program Files/gradle-7.4.2-bin/gradle-7.4.2/caches/modules-2/files-2.1/org.openjfx/javafx-controls/19-ea+5/e00dac70e5e4b8c7e2fa94eab5e969124f37ef15/javafx-controls-19-ea+5-win.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/19-ea+5/e651b63c181b161ea5435e26a94a63b7c8e8702d/javafx-controls-19-ea+5-sources.jar!/" />
+      <root url="jar://C:/Program Files/gradle-7.4.2-bin/gradle-7.4.2/caches/modules-2/files-2.1/org.openjfx/javafx-controls/19-ea+5/e651b63c181b161ea5435e26a94a63b7c8e8702d/javafx-controls-19-ea+5-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

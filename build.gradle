@@ -48,7 +48,6 @@ dependencies {
     implementation('org.hibernate:hibernate-entitymanager:5.6.8.Final')
     implementation 'org.jetbrains:annotations:20.1.0'
 
-
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
@@ -68,3 +67,5 @@ jlink {
 jlinkZip {
     group = 'distribution'
 }
+
+

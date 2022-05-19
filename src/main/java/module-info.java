@@ -13,5 +13,7 @@ module app.amagon {
     requires jakarta.persistence;
     requires org.jetbrains.annotations;
     exports app.amagon;
+    exports app.amagon.entities;
     opens app.amagon to javafx.fxml;
+    opens app.amagon.entities to javafx.base;
 }
