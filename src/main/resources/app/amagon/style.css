@@ -26,3 +26,9 @@
 #rich-blue Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
 }
+
+.main-info-box{
+    -fx-border-width: 2px;
+    -fx-border-color: rgba(86, 103, 253, 1.0);
+    -fx-border-radius: 5px;
+}

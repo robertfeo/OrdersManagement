@@ -1,11 +1,9 @@
 package app.amagon;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,10 +16,8 @@ import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class Controller{
     public TableColumn<Customer,Integer> tbCustomerID;
@@ -34,6 +30,7 @@ public class Controller{
     public TextField txfAddress;
     public TextField txfName;
     public TextField txfCity;
+    public ChoiceBox<Customer> cbCustomerID;
     DBUtil db_utils = new DBUtil();
     double x,y;
     public Label lbAnzahlBestellungen;
@@ -175,6 +172,13 @@ public class Controller{
         tbCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tbCustomerCity.setCellValueFactory(new PropertyValueFactory<>("city"));
         customerTable.setItems(db_utils.getCustomerList());
+        DBUtil.dbDisconnect();
+    }
+
+    public void refreshCustomerChoiceList() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        ObservableList<Customer> customers = db_utils.getCustomerList();
+        cbCustomerID.getItems().addAll(customers);
         DBUtil.dbDisconnect();
     }
 

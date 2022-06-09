@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1075.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.amagon.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1173.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.amagon.Controller">
    <children>
       <VBox prefHeight="599.0" prefWidth="245.0" style="-fx-background-color: #5667FD;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -49,7 +49,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" stylesheets="@style.css" text="Produkte" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#productsScene" prefHeight="65.0" prefWidth="312.0" stylesheets="@style.css" text="Lagerbestände" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -64,21 +64,24 @@
             <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.0175" spread="0.32" width="18.07" />
          </effect>
       </VBox>
-      <Label alignment="CENTER" layoutX="247.0" layoutY="51.0" prefHeight="65.0" prefWidth="829.0" text="AmaGon Store Manager" textFill="#5667fd">
+      <Label alignment="CENTER" layoutX="247.0" layoutY="51.0" prefHeight="65.0" prefWidth="926.0" text="Shop Management" textFill="#5667fd">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <VBox fx:id="pnItems" alignment="CENTER" layoutX="255.0" layoutY="188.0" prefHeight="215.0" prefWidth="815.0" style="-fx-background-color: #ffff;">
+      <VBox fx:id="pnItems" alignment="CENTER" layoutX="251.0" layoutY="232.0" prefHeight="215.0" prefWidth="918.0" spacing="25.0" style="-fx-background-color: #ffff;">
          <children>
-            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="815.0">
+            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="815.0" spacing="25.0">
                <children>
-                  <VBox prefHeight="150.0" prefWidth="245.0">
+                  <VBox prefHeight="150.0" prefWidth="245.0" styleClass="main-info-box" stylesheets="@style.css">
                      <children>
                         <Label fx:id="lbAnzahlBestellungen" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="-" textFill="#5667fd">
                            <font>
                               <Font size="24.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </Label>
                         <Label alignment="CENTER" prefHeight="25.0" prefWidth="309.0" text="Anzahl Bestellungen" textFill="#5667fd">
                            <font>
@@ -86,13 +89,19 @@
                            </font>
                         </Label>
                      </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="150.0" prefWidth="245.0">
+                  <VBox prefHeight="150.0" prefWidth="245.0" styleClass="main-info-box" stylesheets="@style.css">
                      <children>
                         <Label fx:id="lbRegKunden" alignment="CENTER" prefHeight="54.0" prefWidth="335.0" text="-" textFill="#5667fd">
                            <font>
                               <Font size="24.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </Label>
                         <Label alignment="CENTER" prefHeight="25.0" prefWidth="348.0" text="Registrierte Kunden" textFill="#5667fd">
                            <font>
