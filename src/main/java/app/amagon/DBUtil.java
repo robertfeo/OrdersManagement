@@ -159,10 +159,14 @@ public class DBUtil {
         return productList;
     }
 
-    public static ObservableList<Customer> getCustomerList() throws SQLException, ClassNotFoundException {
+    public static ObservableList<Customer> getAllCustomersList() throws SQLException, ClassNotFoundException {
         dbConnect();
         getCustomerData();
         dbDisconnect();
+        return customerList;
+    }
+
+    public static ObservableList<Customer> getCustomersList() throws SQLException, ClassNotFoundException {
         return customerList;
     }
 

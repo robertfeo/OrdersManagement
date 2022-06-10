@@ -1,7 +1,6 @@
 package app.amagon;
 
 import app.amagon.entities.Product;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
@@ -152,7 +150,7 @@ public class Controller{
         tbCustomerName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tbCustomerCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-        customerTable.setItems(DBUtil.getCustomerList());
+        customerTable.setItems(DBUtil.getAllCustomersList());
         DBUtil.dbDisconnect();
         refreshCustomerChoiceList();
     }
@@ -177,7 +175,8 @@ public class Controller{
         DBUtil.dbConnect();
         if (!cbCustomerID.getSelectionModel().isEmpty()){
             DBUtil.getCustomerByID(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()));
-            for (Customer c : DBUtil.getCustomerList()){
+            customerTable.setItems(DBUtil.getCustomersList());
+            for (Customer c : DBUtil.getAllCustomersList()){
                 if (c.getCustomerId() == cbCustomerID.getSelectionModel().getSelectedItem()){
                     txfSearchCustomerByName.setText(c.getName());
                 }
@@ -192,14 +191,14 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
-    public void clickRow(MouseEvent mouseEvent) {
+    public void clickRowCustomer(MouseEvent mouseEvent) {
         try{
             txfSurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
             txfName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
             txfAddress.setText(customerTable.getSelectionModel().getSelectedItem().getAddress());
             txfCity.setText(customerTable.getSelectionModel().getSelectedItem().getCity());
-        }catch(NullPointerException ex){
-            return;
-        }
+            txfSearchCustomerByName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
+            cbCustomerID.getSelectionModel().select(customerTable.getSelectionModel().getSelectedItem().getCustomerId()-1);
+        }catch(NullPointerException ignored){}
     }
 }

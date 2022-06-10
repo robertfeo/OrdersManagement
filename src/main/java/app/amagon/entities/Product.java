@@ -30,6 +30,8 @@ public class Product {
         this.setPrice(price);
     }
 
+    public Product() {}
+
     public int getProductId() {
         return productId;
     }
