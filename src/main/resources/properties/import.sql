@@ -19,11 +19,12 @@ VALUES
     ('Sabine', 'Kappel', 'Scharnweberstrasse 84','Neuberg'),
     ('Stefanie', 'Drescher', 'Schaarsteinweg 53', N'Mötzing');
 
-insert into [amagon].[product] values ('LED Strip 20m', 'Beleuchtung', '29.99');
-insert into [amagon].[product] values ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', N'Computer & Zubehör', '1751.01');
-insert into [amagon].[product] values ('Samsung 980 PRO 1 TB PCIe 4.0', N'Computer & Zubehör', '133.90');
-insert into [amagon].[product] values ('Arcon 207X Kompatibel Tonerkartusche', 'Drucker & Patronen', '131.99');
-insert into [amagon].[product] values ('SanDisk 128 GB Ultra microSD', N'Computer & Zubehör', '14.99');
-insert into [amagon].[product] values ('Office 2021 Home und Student Multilingual', 'Software', '88.00');
-insert into [amagon].[product] values ('Siemens Kaffeevollautomat EQ.500', N'Küche, Haushalt & Wohnen', '618.75');
-insert into [amagon].[product] values ('Schreibtisch-Winkelkombination Tisch', N'Küche, Haushalt & Wohnen', '148.99');
+INSERT INTO [amagon].[product]
+VALUES ('LED Strip 20m', 'Beleuchtung', '29.99'),
+       ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', N'Computer & Zubehör', '1751.01'),
+       ('Samsung 980 PRO 1 TB PCIe 4.0', N'Computer & Zubehör', '133.90'),
+       ('Arcon 207X Kompatibel Tonerkartusche', 'Drucker & Patronen', '131.99'),
+       ('SanDisk 128 GB Ultra microSD', N'Computer & Zubehör', '14.99'),
+       ('Office 2021 Home und Student Multilingual', 'Software', '88.00'),
+       ('Siemens Kaffeevollautomat EQ.500', N'Küche, Haushalt & Wohnen', '618.75'),
+       ('Schreibtisch-Winkelkombination Tisch', N'Küche, Haushalt & Wohnen', '148.99');
