@@ -95,4 +95,15 @@ public class Product {
     public void setOrderItemsByProductId(List<OrderItem> orderItemsByProductId) {
         this.orderItemsByProductId = orderItemsByProductId;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", orderItemsByProductId=" + orderItemsByProductId +
+                '}';
+    }
 }

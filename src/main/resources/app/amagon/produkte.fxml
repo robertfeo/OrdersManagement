@@ -76,11 +76,11 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <HBox layoutX="274.0" layoutY="125.0" prefHeight="524.0" prefWidth="872.0">
+      <HBox layoutX="274.0" layoutY="125.0" prefHeight="547.0" prefWidth="872.0">
          <children>
             <VBox prefHeight="524.0" prefWidth="500.0">
                <children>
-                  <TableView fx:id="productTable" prefHeight="348.0" prefWidth="487.0">
+                  <TableView fx:id="productTable" onMouseClicked="#clickRowProduct" prefHeight="348.0" prefWidth="487.0">
                     <columns>
                       <TableColumn fx:id="tbProductID" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="ID" />
                       <TableColumn fx:id="tbProductName" prefWidth="181.0" text="Artikelname" />
@@ -91,12 +91,12 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <BarChart prefHeight="211.0" prefWidth="487.0">
+                  <BarChart fx:id="barChart" prefHeight="215.0" prefWidth="487.0">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis fx:id="yAxis" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis side="LEFT" fx:id="xAxis" />
                     </yAxis>
                   </BarChart>
                </children>
@@ -106,25 +106,25 @@
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="373.0">
                      <children>
                         <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Artikelname" wrappingWidth="100.0" />
-                        <TextField prefHeight="30.0" prefWidth="195.0" />
+                        <TextField fx:id="txfProductName" prefHeight="30.0" prefWidth="195.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="373.0">
                      <children>
                         <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorie" wrappingWidth="100.0" />
-                        <TextField prefHeight="30.0" prefWidth="195.0" />
+                        <TextField fx:id="txfProductCategory" prefHeight="30.0" prefWidth="195.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="373.0">
                      <children>
                         <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Kaufpreis" wrappingWidth="100.0" />
-                        <TextField prefHeight="30.0" prefWidth="195.0" />
+                        <TextField fx:id="txfProductPrice" prefHeight="30.0" prefWidth="195.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="361.0" spacing="15.0" stylesheets="@style.css">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Hinzufügen" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Bearbeiten" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#addProductToDatabase" prefHeight="30.0" prefWidth="90.0" text="Hinzufügen" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#saveEditProductToDatabase" prefHeight="30.0" prefWidth="90.0" text="Bearbeiten" textFill="WHITE" />
                         <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Löschen" textFill="WHITE" />
                      </children>
                      <VBox.margin>

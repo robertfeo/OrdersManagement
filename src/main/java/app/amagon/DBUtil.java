@@ -4,7 +4,9 @@ import app.amagon.entities.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import app.amagon.entities.Customer;
+import java.math.BigDecimal;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class DBUtil {
@@ -21,7 +23,7 @@ public class DBUtil {
 
     private static ObservableList<Product> productList;
 
-    private static ObservableList<Integer> customerIDs;
+    private static HashMap<String,Integer> listNumberProductCategories;
 
     public static void dbConnect() throws SQLException, ClassNotFoundException{
         String dbPass = "robert1324";
@@ -53,10 +55,6 @@ public class DBUtil {
             db_connection.close();
             db_connection = null;
         }
-    }
-
-    public void initData() throws SQLException {
-        getCustomerData();
     }
 
     private static void getCustomerData() throws SQLException {
@@ -166,12 +164,12 @@ public class DBUtil {
         return customerList;
     }
 
-    public static ObservableList<Customer> getCustomersList() throws SQLException, ClassNotFoundException {
+    public static ObservableList<Customer> getCustomersList(){
         return customerList;
     }
 
     public static ObservableList<Integer> getCustomerIDs() throws SQLException {
-        customerIDs = FXCollections.observableArrayList();
+        ObservableList<Integer> customerIDs = FXCollections.observableArrayList();
         try{
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("select customer_id from amagon.customer");
@@ -184,7 +182,6 @@ public class DBUtil {
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
             }
         }catch (SQLException e){
-            System.out.println("Problem beim Ausführen von Query.");
             e.printStackTrace();
             throw e;
         }
@@ -224,44 +221,109 @@ public class DBUtil {
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
             }
         } catch (SQLException e) {
-            System.out.println("Problem beim Ausfuehren von Query.");
             e.printStackTrace();
             throw e;
         } finally {
             if (rs != null) {
                 try {
                     rs.close();
-                } catch (Exception e) {
-                }
+                } catch(Exception e) { e.printStackTrace(); }
             }
             if (p_stmt != null) {
                 try {
                     p_stmt.close();
-                } catch (Exception e) {
-                }
+                } catch(Exception e) { e.printStackTrace(); }
             }
             if (db_connection != null) {
                 try {
                     db_connection.close();
-                } catch (Exception e) {
-                }
+                } catch(Exception e) { e.printStackTrace(); }
             }
         }
         return total;
+    }
+
+    /*public static int getTotalProductsCategory(String category) throws SQLException {
+        int total = 0;
+        try {
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("select [amagon].[getTotalProductsCategory](?) as total");
+                p_stmt.setString(1, category);
+                rs = p_stmt.executeQuery();
+                while(rs.next()){
+                    total = rs.getInt(rs.findColumn("total"));
+                }
+            } else {
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+        return total;
+    }*/
+
+    public static HashMap<String, Integer> getListNumberProductCategory() throws SQLException {
+        try {
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("select [amagon].[getListProductCategories]()");
+                rs = p_stmt.executeQuery();
+                while(rs.next()){
+                    listNumberProductCategories.put(rs.getString("category"),rs.getInt("total"));
+                }
+            } else {
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+        return listNumberProductCategories;
     }
 
     public static void deleteCustomerByID(String ID) throws SQLException{
         try{
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("exec [amagon].[deleteByCustomerID] ?");
-                p_stmt.setString(1,ID);
+                p_stmt.setString(1, ID);
                 p_stmt.execute();
             }
             else{
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
             }
         }catch (SQLException e){
-            System.out.println("Problem beim Ausführen von Query.");
             e.printStackTrace();
             throw e;
         }
@@ -270,21 +332,20 @@ public class DBUtil {
                 try {
                     rs.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
             if (p_stmt != null) {
                 try {
                     p_stmt.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
             if (db_connection != null) {
                 try {
                     db_connection.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
-
         }
     }
 
@@ -293,10 +354,10 @@ public class DBUtil {
             if (!db_connection.isClosed()) {
                 if (!Objects.equals(surname, "") || !Objects.equals(name, "") || !Objects.equals(address, "") || !Objects.equals(city, "")){
                     p_stmt = db_connection.prepareStatement("exec [amagon].[addCustomer] ?,?,?,?");
-                    p_stmt.setString(1,surname);
-                    p_stmt.setString(2,name);
-                    p_stmt.setString(3,address);
-                    p_stmt.setString(4,city);
+                    p_stmt.setString(1, surname);
+                    p_stmt.setString(2, name);
+                    p_stmt.setString(3, address);
+                    p_stmt.setString(4, city);
                     p_stmt.execute();
                 }
             }
@@ -304,7 +365,6 @@ public class DBUtil {
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
             }
         }catch (SQLException e){
-            System.out.println("Problem beim Ausführen von Query.");
             e.printStackTrace();
             throw e;
         }
@@ -313,21 +373,99 @@ public class DBUtil {
                 try {
                     rs.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
             if (p_stmt != null) {
                 try {
                     p_stmt.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
             if (db_connection != null) {
                 try {
                     db_connection.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
+        }
+    }
 
+    public static void addProduct(String ProductName, String ProductCategory, String Price) throws SQLException {
+        try{
+            if (!db_connection.isClosed()) {
+                if (!Objects.equals(ProductName, "") || !Objects.equals(ProductCategory, "") || !Objects.equals(Price, "")){
+                    p_stmt = db_connection.prepareStatement("exec [amagon].[addProduct] ?,?,?");
+                    p_stmt.setString(1, ProductName);
+                    p_stmt.setString(2, ProductCategory);
+                    p_stmt.setString(3, Price);
+                    p_stmt.execute();
+                }
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw e;
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    public static void editProduct(int ID,String ProductName, String ProductCategory, String Price) throws SQLException{
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[editProduct] ?,?,?,?");
+                p_stmt.setInt(1, ID);
+                p_stmt.setString(2, ProductName);
+                p_stmt.setString(3, ProductCategory);
+                p_stmt.setBigDecimal(4, BigDecimal.valueOf(Double.parseDouble(Price)));
+                p_stmt.execute();
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw e;
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
         }
     }
 
@@ -361,21 +499,20 @@ public class DBUtil {
                 try {
                     rs.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
             if (p_stmt != null) {
                 try {
                     p_stmt.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
             if (db_connection != null) {
                 try {
                     db_connection.close();
                 }
-                catch(Exception e) {}
+                catch(Exception e) { e.printStackTrace(); }
             }
         }
     }
-
 }

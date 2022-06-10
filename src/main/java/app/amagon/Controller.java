@@ -7,44 +7,84 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Controller{
+    @FXML
     public TableColumn<Customer,Integer> tbCustomerID;
+    @FXML
     public TableColumn<Customer,String>  tbCustomerSurname;
+    @FXML
     public TableColumn<Customer,String> tbCustomerName;
+    @FXML
     public TableColumn<Customer,String> tbCustomerAddress;
+    @FXML
     public TableColumn<Customer,String> tbCustomerCity;
+    @FXML
     public TextField txfDeleteByID;
+    @FXML
     public TextField txfSurname;
+    @FXML
     public TextField txfAddress;
+    @FXML
     public TextField txfName;
+    @FXML
     public TextField txfCity;
+    @FXML
     public ChoiceBox<Integer> cbCustomerID;
+    @FXML
     public TextField txfSearchCustomerByName;
+    @FXML
     public TableView<Product> productTable;
+    @FXML
     public TableColumn<Product,Integer> tbProductID;
+    @FXML
     public TableColumn<Product,String> tbProductName;
+    @FXML
     public TableColumn<Product,String> tbProductCategory;
+    @FXML
     public TableColumn<Product, BigDecimal> tbProductPrice;
+    @FXML
+    public TextField txfProductName;
+    @FXML
+    public TextField txfProductCategory;
+    @FXML
+    public TextField txfProductPrice;
+    @FXML
+    public BarChart barChart;
+    @FXML
+    public CategoryAxis yAxis;
+    @FXML
+    public NumberAxis xAxis;
     double x,y;
+    @FXML
     public Label lbAnzahlBestellungen;
+    @FXML
     public Button btnCustomerAdd;
+    @FXML
     public Button btnCustomerRefresh;
+    @FXML
     public TableView<Customer> customerTable;
     @FXML
     private Label lbRegKunden;
+    @FXML
     private Stage stage;
+    @FXML
     private Scene scene;
 
     //  CHANGE TO MAIN SCENE
@@ -132,6 +172,17 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    public void addProductToDatabase() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        try{
+            DBUtil.addProduct(txfProductName.getText(),txfProductCategory.getText(),txfProductPrice.getText());
+            this.refreshProductTable();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        DBUtil.dbDisconnect();
+    }
+
     public void deleteCustomerFromDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try{
@@ -163,6 +214,7 @@ public class Controller{
         tbProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         productTable.setItems(DBUtil.getProductList());
         DBUtil.dbDisconnect();
+        refreshBarChartProduct();
     }
 
     public void refreshCustomerChoiceList() throws SQLException, ClassNotFoundException {
@@ -191,6 +243,29 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    public void saveEditProductToDatabase() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        try{
+            for (Product p : DBUtil.getProductList()) {
+                if (Objects.equals(p.getProductName(), txfProductName.getText())
+                        && Objects.equals(p.getCategory(), txfProductCategory.getText())
+                        && Objects.equals(String.valueOf(p.getPrice()), txfProductPrice.getText())){
+                    System.out.println(p.getProductId());
+                }
+                else{ System.out.println("nicht gefunden"); }
+            }
+            try{
+                DBUtil.dbConnect();
+                DBUtil.editProduct(productTable.getSelectionModel().getSelectedItem().getProductId(),txfProductName.getText(),txfProductCategory.getText(),txfProductPrice.getText());
+                DBUtil.dbDisconnect();
+            }catch(NullPointerException ignored){}
+            this.refreshProductTable();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        DBUtil.dbDisconnect();
+    }
+
     public void clickRowCustomer(MouseEvent mouseEvent) {
         try{
             txfSurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
@@ -200,5 +275,27 @@ public class Controller{
             txfSearchCustomerByName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
             cbCustomerID.getSelectionModel().select(customerTable.getSelectionModel().getSelectedItem().getCustomerId()-1);
         }catch(NullPointerException ignored){}
+    }
+
+    public void clickRowProduct(MouseEvent mouseEvent){
+        try{
+            txfProductName.setText(productTable.getSelectionModel().getSelectedItem().getProductName());
+            txfProductCategory.setText(productTable.getSelectionModel().getSelectedItem().getCategory());
+            txfProductPrice.setText(String.valueOf(productTable.getSelectionModel().getSelectedItem().getPrice()));
+        }catch(NullPointerException ignored){}
+    }
+
+    public void refreshBarChartProduct() throws SQLException, ClassNotFoundException {
+        barChart.getData().clear();
+        xAxis.setLabel("Anzahl Produkte");
+        yAxis.setLabel("Preis");
+        yAxis.tickLabelFontProperty().set(Font.font(8));
+        XYChart.Series dataSeries = new XYChart.Series();
+        dataSeries.setName("Produktkategorie");
+        DBUtil.dbConnect();
+        HashMap<String,Integer> list = DBUtil.getListNumberProductCategory();
+        System.out.println(list);
+        DBUtil.dbDisconnect();
+        barChart.getData().add(dataSeries);
     }
 }
