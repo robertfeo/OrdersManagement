@@ -1,5 +1,6 @@
 package app.amagon;
 
+import app.amagon.entities.Product;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,13 +10,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -30,43 +32,22 @@ public class Controller{
     public TextField txfAddress;
     public TextField txfName;
     public TextField txfCity;
-    public ChoiceBox<Customer> cbCustomerID;
-    DBUtil db_utils = new DBUtil();
+    public ChoiceBox<Integer> cbCustomerID;
+    public TextField txfSearchCustomerByName;
+    public TableView<Product> productTable;
+    public TableColumn<Product,Integer> tbProductID;
+    public TableColumn<Product,String> tbProductName;
+    public TableColumn<Product,String> tbProductCategory;
+    public TableColumn<Product, BigDecimal> tbProductPrice;
     double x,y;
     public Label lbAnzahlBestellungen;
     public Button btnCustomerAdd;
     public Button btnCustomerRefresh;
     public TableView<Customer> customerTable;
     @FXML
-    private Label lbStatus;
-    @FXML
     private Label lbRegKunden;
-    @FXML
-    private Button btnDbDisconnect;
-    @FXML
-    private Button btnDbConnect;
-    @FXML
-    private AnchorPane rootPane;
     private Stage stage;
     private Scene scene;
-
-    @FXML
-    protected void connectToDatabase() throws SQLException, ClassNotFoundException {
-        DBUtil.dbConnect();
-        lbStatus.setTextFill(Color.color(0, 0.5, 0.2));
-        lbStatus.setText("Verbindung erfolgreich hergestellt.");
-        btnDbConnect.setDisable(true);
-        btnDbDisconnect.setDisable(false);
-    }
-
-    @FXML   //  USED IN BUTTON TO CONNECT TO DATABASE
-    protected void disconnectFromDatabase() throws SQLException {
-        DBUtil.dbDisconnect();
-        lbStatus.setTextFill(Color.color(0.7, 0.1, 0.1));
-        lbStatus.setText("Verbindung wurde getrennt.");
-        btnDbDisconnect.setDisable(true);
-        btnDbConnect.setDisable(false);
-    }
 
     //  CHANGE TO MAIN SCENE
     public void mainScene(@NotNull ActionEvent event) throws IOException{
@@ -103,7 +84,7 @@ public class Controller{
     }
 
     //  CHANGE TO CUSTOMERS SCENE
-    public void kundenScene(@NotNull ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    public void kundenScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/kunden.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -171,14 +152,37 @@ public class Controller{
         tbCustomerName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tbCustomerCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-        customerTable.setItems(db_utils.getCustomerList());
+        customerTable.setItems(DBUtil.getCustomerList());
+        DBUtil.dbDisconnect();
+        refreshCustomerChoiceList();
+    }
+
+    public void refreshProductTable() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        tbProductID.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        tbProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        tbProductCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        tbProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productTable.setItems(DBUtil.getProductList());
         DBUtil.dbDisconnect();
     }
 
     public void refreshCustomerChoiceList() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
-        ObservableList<Customer> customers = db_utils.getCustomerList();
-        cbCustomerID.getItems().addAll(customers);
+        cbCustomerID.setItems(DBUtil.getCustomerIDs());
+        DBUtil.dbDisconnect();
+    }
+
+    public void searchCustomer() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        if (!cbCustomerID.getSelectionModel().isEmpty()){
+            DBUtil.getCustomerByID(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()));
+            for (Customer c : DBUtil.getCustomerList()){
+                if (c.getCustomerId() == cbCustomerID.getSelectionModel().getSelectedItem()){
+                    txfSearchCustomerByName.setText(c.getName());
+                }
+            }
+        }
         DBUtil.dbDisconnect();
     }
 
@@ -186,5 +190,16 @@ public class Controller{
         DBUtil.dbConnect();
         lbRegKunden.setText(Integer.toString(DBUtil.getTotalCustomers()));
         DBUtil.dbDisconnect();
+    }
+
+    public void clickRow(MouseEvent mouseEvent) {
+        try{
+            txfSurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
+            txfName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
+            txfAddress.setText(customerTable.getSelectionModel().getSelectedItem().getAddress());
+            txfCity.setText(customerTable.getSelectionModel().getSelectedItem().getCity());
+        }catch(NullPointerException ex){
+            return;
+        }
     }
 }

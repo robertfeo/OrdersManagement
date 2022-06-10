@@ -28,7 +28,8 @@
 }
 
 .main-info-box{
-    -fx-border-width: 2px;
-    -fx-border-color: rgba(86, 103, 253, 1.0);
-    -fx-border-radius: 5px;
+    /*-fx-background-color: rgba(131, 146, 255, 1.0);*/
+    -fx-background-color:#5667FD;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 5px;
 }

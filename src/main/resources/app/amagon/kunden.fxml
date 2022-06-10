@@ -79,72 +79,75 @@
             <children>
             <VBox alignment="CENTER_LEFT" prefHeight="188.0" prefWidth="898.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="149.0" prefWidth="898.0" spacing="20.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="149.0" prefWidth="898.0" spacing="15.0">
                      <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="141.0" prefWidth="477.0" spacing="10.0" styleClass="main-info-box" stylesheets="@style.css">
+                        <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="898.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="98.0" prefWidth="462.0" spacing="10.0" styleClass="main-info-box" stylesheets="@style.css">
                                  <children>
-                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Kunden ID" wrappingWidth="100.0">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kunden in der Datenbank suchen" textAlignment="CENTER" wrappingWidth="447.0">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </Text>
-                                    <ChoiceBox fx:id="cbCustomerID" onMouseClicked="#refreshCustomerChoiceList" prefHeight="30.0" prefWidth="160.0" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="458.0">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="46.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Text>
+                                          <TextField fx:id="txfSearchCustomerByName" prefHeight="30.0" prefWidth="160.0">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="RIGHT" wrappingWidth="27.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" right="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <ChoiceBox fx:id="cbCustomerID" onMouseClicked="#refreshCustomerChoiceList" prefHeight="30.0" prefWidth="92.0" />
+                                          <CheckBox fx:id="cbHasOrder" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Bestellung" textFill="WHITE">
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </CheckBox>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="898.0">
-                                 <children>
-                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundenname" wrappingWidth="100.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Text>
-                                    <TextField fx:id="txfSearchCustomerByName" prefHeight="30.0" prefWidth="160.0">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </TextField>
-                                    <CheckBox fx:id="cbHasOrder" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Bestellung" textFill="#5667fd">
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </CheckBox>
-                                 </children>
-                              </HBox>
-                              <Button fx:id="btnSearchCustomer" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" stylesheets="@style.css" text="Suchen" textFill="WHITE" />
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </VBox>
+                              <Button fx:id="btnSearchCustomer" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="30.0" prefWidth="130.0" stylesheets="@style.css" text="Suchen" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="14.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="141.0" prefWidth="373.0" styleClass="main-info-box" stylesheets="@style.css">
+                        <VBox alignment="CENTER" prefHeight="149.0" prefWidth="390.0" styleClass="main-info-box" stylesheets="@style.css">
                            <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Weitere Kundeninformationen" textAlignment="CENTER" wrappingWidth="320.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
                               <HBox fx:id="lblOrderNr" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
                                  <children>
-                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestellungsnr" wrappingWidth="145.0">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestellungsnr" wrappingWidth="145.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
-                                 <children>
-                                    <Text fx:id="lblOrderDate" fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestelldatum" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -153,12 +156,26 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
                                  <children>
-                                    <Text fx:id="lblTotalPrice" fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtwert" wrappingWidth="145.0">
+                                    <Text fx:id="lblOrderDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestelldatum" wrappingWidth="145.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Text>
-                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
+                                 <children>
+                                    <Text fx:id="lblTotalPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtwert" wrappingWidth="145.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -185,7 +202,7 @@
                            <children>
                                     <HBox prefHeight="355.0" prefWidth="548.0">
                                         <children>
-                                            <TableView fx:id="customerTable" prefHeight="355.0" prefWidth="595.0">
+                                            <TableView fx:id="customerTable" onMouseClicked="#clickRow" prefHeight="355.0" prefWidth="595.0">
                                                 <columns>
                                                         <TableColumn fx:id="tbCustomerID" maxWidth="68.0" minWidth="68.0" prefWidth="68.0" text="ID" />
                                                         <TableColumn fx:id="tbCustomerSurname" minWidth="0.0" prefWidth="108.0" text="Name" />
@@ -210,7 +227,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox prefHeight="378.0" prefWidth="250.0">
+                        <VBox prefHeight="350.0" prefWidth="250.0">
                            <children>
                               <VBox prefHeight="288.0" prefWidth="250.0">
                                  <children>

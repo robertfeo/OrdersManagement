@@ -23,6 +23,13 @@ public class Product {
     @OneToMany(mappedBy = "productByProductId")
     private List<OrderItem> orderItemsByProductId;
 
+    public Product(int ID, String productName, String category, BigDecimal price){
+        this.setProductId(ID);
+        this.setProductName(productName);
+        this.setCategory(category);
+        this.setPrice(price);
+    }
+
     public int getProductId() {
         return productId;
     }
