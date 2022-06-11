@@ -23,8 +23,6 @@ public class DBUtil {
 
     private static ObservableList<Product> productList;
 
-    private static HashMap<String,Integer> listNumberProductCategories;
-
     public static void dbConnect() throws SQLException, ClassNotFoundException{
         String dbPass = "robert1324";
         String dbHost = "localhost";
@@ -115,7 +113,8 @@ public class DBUtil {
                             rs.getInt("product_id"),
                             rs.getString("product_name"),
                             rs.getString("category"),
-                            rs.getBigDecimal("price"));
+                            rs.getBigDecimal("price"),
+                            rs.getInt("quantity"));
                     productList.add(product);
                 }
             }
@@ -279,10 +278,11 @@ public class DBUtil {
         return total;
     }*/
 
-    public static HashMap<String, Integer> getListNumberProductCategory() throws SQLException {
+    public static HashMap<String,Integer> getListProductCategory() throws SQLException {
+        HashMap<String, Integer> listNumberProductCategories = new HashMap<>();
         try {
             if (!db_connection.isClosed()) {
-                p_stmt = db_connection.prepareStatement("select [amagon].[getListProductCategories]()");
+                p_stmt = db_connection.prepareStatement("exec [amagon].[getListProductCategories]");
                 rs = p_stmt.executeQuery();
                 while(rs.next()){
                     listNumberProductCategories.put(rs.getString("category"),rs.getInt("total"));
@@ -317,6 +317,42 @@ public class DBUtil {
         try{
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("exec [amagon].[deleteByCustomerID] ?");
+                p_stmt.setString(1, ID);
+                p_stmt.execute();
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw e;
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    public static void deleteProductByID(String ID) throws SQLException{
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[deleteProductByID] ?");
                 p_stmt.setString(1, ID);
                 p_stmt.execute();
             }
@@ -390,14 +426,15 @@ public class DBUtil {
         }
     }
 
-    public static void addProduct(String ProductName, String ProductCategory, String Price) throws SQLException {
+    public static void addProduct(String ProductName, String ProductCategory, String Price, String Quantity) throws SQLException {
         try{
             if (!db_connection.isClosed()) {
-                if (!Objects.equals(ProductName, "") || !Objects.equals(ProductCategory, "") || !Objects.equals(Price, "")){
-                    p_stmt = db_connection.prepareStatement("exec [amagon].[addProduct] ?,?,?");
+                if (!Objects.equals(ProductName, "") || !Objects.equals(ProductCategory, "") || !Objects.equals(Price, "") || !Objects.equals(Quantity, "")){
+                    p_stmt = db_connection.prepareStatement("exec [amagon].[addProduct] ?,?,?,?");
                     p_stmt.setString(1, ProductName);
                     p_stmt.setString(2, ProductCategory);
                     p_stmt.setString(3, Price);
+                    p_stmt.setString(4, Quantity);
                     p_stmt.execute();
                 }
             }

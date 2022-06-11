@@ -20,11 +20,11 @@ VALUES
     ('Stefanie', 'Drescher', 'Schaarsteinweg 53', N'Mötzing');
 
 INSERT INTO [amagon].[product]
-VALUES ('LED Strip 20m', 'Beleuchtung', '29.99'),
-       ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', N'Computer & Zubehör', '1751.01'),
-       ('Samsung 980 PRO 1 TB PCIe 4.0', N'Computer & Zubehör', '133.90'),
-       ('Arcon 207X Kompatibel Tonerkartusche', 'Drucker & Patronen', '131.99'),
-       ('SanDisk 128 GB Ultra microSD', N'Computer & Zubehör', '14.99'),
-       ('Office 2021 Home und Student Multilingual', 'Software', '88.00'),
-       ('Siemens Kaffeevollautomat EQ.500', N'Küche, Haushalt & Wohnen', '618.75'),
-       ('Schreibtisch-Winkelkombination Tisch', N'Küche, Haushalt & Wohnen', '148.99');
+VALUES ('LED Strip 20m', 'Beleuchtung', '29.99', 4),
+       ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', N'Computer & Zubehör', '1751.01', 2),
+       ('Samsung 980 PRO 1 TB PCIe 4.0', N'Computer & Zubehör', '133.90', 4),
+       ('Arcon 207X Kompatibel Tonerkartusche', 'Drucker & Patronen', '131.99', 7),
+       ('SanDisk 128 GB Ultra microSD', N'Computer & Zubehör', '14.99', 12),
+       ('Office 2021 Home und Student Multilingual', 'Software', '88.00', 21),
+       ('Siemens Kaffeevollautomat EQ.500', N'Haushalt & Wohnen', '618.75', 6),
+       ('Schreibtisch-Winkelkombination Tisch', N'Haushalt & Wohnen', '148.99', 3);

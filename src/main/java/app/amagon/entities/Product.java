@@ -20,14 +20,18 @@ public class Product {
     @Basic
     @Column(name = "price", nullable = false, precision = 2)
     private BigDecimal price;
+    @Basic
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
     @OneToMany(mappedBy = "productByProductId")
     private List<OrderItem> orderItemsByProductId;
 
-    public Product(int ID, String productName, String category, BigDecimal price){
+    public Product(int ID, String productName, String category, BigDecimal price, int quantity){
         this.setProductId(ID);
         this.setProductName(productName);
         this.setCategory(category);
         this.setPrice(price);
+        this.setQuantity(quantity);
     }
 
     public Product() {}
@@ -63,6 +67,10 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public int getQuantity() { return quantity; }
+
+    public void setQuantity(int q) { this.quantity = q; }
 
     @Override
     public boolean equals(Object o) {
