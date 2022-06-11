@@ -250,7 +250,6 @@ public class DBUtil {
                 rs = p_stmt.executeQuery();
                 while(rs.next()){
                     total = rs.getInt(rs.findColumn("total"));
-                    System.out.println(total);
                 }
             } else {
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
@@ -421,7 +420,7 @@ public class DBUtil {
         }
     }
 
-    public static void addCustomer(String surname,String name,String address,String city) throws SQLException {
+    public static void addCustomer(String surname, String name, String address, String city) throws SQLException {
         try{
             if (!db_connection.isClosed()) {
                 if (!Objects.equals(surname, "") || !Objects.equals(name, "") || !Objects.equals(address, "") || !Objects.equals(city, "")){
@@ -503,15 +502,15 @@ public class DBUtil {
         }
     }
 
-    public static void editProduct(int ID,String ProductName, String ProductCategory, String Price, String Quantity) throws SQLException{
+    public static void editProduct(int ID, String ProductName, String ProductCategory, String Price, int Quantity) throws SQLException{
         try{
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("exec [amagon].[editProduct] ?,?,?,?,?");
                 p_stmt.setInt(1, ID);
                 p_stmt.setString(2, ProductName);
                 p_stmt.setString(3, ProductCategory);
-                p_stmt.setBigDecimal(4, BigDecimal.valueOf(Double.parseDouble(Price)));
-                p_stmt.setInt(4, Integer.getInteger(Quantity));
+                p_stmt.setString(4, Price);
+                p_stmt.setInt(5, Quantity);
                 p_stmt.execute();
             }
             else{

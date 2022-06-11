@@ -12,10 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
@@ -71,7 +68,7 @@ public class Controller{
     @FXML
     public TextField txfProductPrice;
     @FXML
-    public BarChart<String,Integer> barChart;
+    public BarChart<CategoryAxis, NumberAxis> barChart;
     @FXML
     public CategoryAxis yAxis;
     @FXML
@@ -98,7 +95,7 @@ public class Controller{
     private Scene scene;
 
     //  CHANGE TO MAIN SCENE
-    public void mainScene(@NotNull ActionEvent event) throws IOException{
+    public void mainScene(@NotNull ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -244,6 +241,33 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    public void refreshBarChartProduct() throws SQLException, ClassNotFoundException {
+
+        barChart.getData().clear();
+        barChart.setLegendVisible(false);
+        xAxis.setLabel("Anzahl Produkte");
+        yAxis.setLabel("Kategorie");
+        yAxis.tickLabelFontProperty().set(Font.font(9));
+        XYChart.Series dataSeries = new XYChart.Series();
+        DBUtil.dbConnect();
+        HashMap<String,Integer> list = DBUtil.getListProductCategory();
+        DBUtil.dbDisconnect();
+        for (String key : list.keySet()){
+            dataSeries.getData().add(new XYChart.Data(key, list.get(key)));
+        }
+        barChart.getData().add(dataSeries);
+    }
+
+    public void refreshDataMain() throws SQLException, ClassNotFoundException {
+        DBUtil.dbConnect();
+        lbRegisteredCustomer.setText(Integer.toString(DBUtil.getTotalCustomers()));
+        DBUtil.dbDisconnect();
+        DBUtil.dbConnect();
+        lbNumberProducts.setText(Integer.toString(DBUtil.getTotalProducts()));
+        DBUtil.dbDisconnect();
+        refreshBarChartProduct();
+    }
+
     public void searchCustomer() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         if (!cbCustomerID.getSelectionModel().isEmpty()){
@@ -258,36 +282,16 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
-    public void refreshDataMain() throws SQLException, ClassNotFoundException {
-        DBUtil.dbConnect();
-        lbRegisteredCustomer.setText(Integer.toString(DBUtil.getTotalCustomers()));
-        DBUtil.dbDisconnect();
-        DBUtil.dbConnect();
-        lbNumberProducts.setText(Integer.toString(DBUtil.getTotalProducts()));
-        DBUtil.dbDisconnect();
-        refreshBarChartProduct();
-        refreshBarChartProduct();
-        refreshBarChartProduct();
-        refreshBarChartProduct();
-    }
-
-    public void saveEditProductToDatabase() throws SQLException, ClassNotFoundException {
+    public void saveEditProductToDatabase() throws SQLException, ClassNotFoundException, NumberFormatException{
         DBUtil.dbConnect();
         try{
-            /*for (Product p : DBUtil.getProductList()) {
-                if (Objects.equals(p.getProductName(), txfProductName.getText())
-                        && Objects.equals(p.getCategory(), txfProductCategory.getText())
-                        && Objects.equals(String.valueOf(p.getPrice()), txfProductPrice.getText())){
-                    System.out.println(p.getProductId());
-                }
-            }*/
             try{
                 DBUtil.dbConnect();
-                DBUtil.editProduct(productTable.getSelectionModel().getSelectedItem().getProductId(),
+                DBUtil.editProduct(Integer.parseInt(txfProductID.getText()),
                         txfProductName.getText(),
                         txfProductCategory.getText(),
                         txfProductPrice.getText(),
-                        txfProductID.getText());
+                        Integer.parseInt(txfProductID.getText()));
                 DBUtil.dbDisconnect();
             }catch(NullPointerException ignored){}
             this.refreshProductTable();
@@ -316,21 +320,5 @@ public class Controller{
             txfProductID.setText(String.valueOf(productTable.getSelectionModel().getSelectedItem().getProductId()));
             txfProductQuantity.setText(String.valueOf(productTable.getSelectionModel().getSelectedItem().getQuantity()));
         }catch(NullPointerException ignored){}
-    }
-
-    public void refreshBarChartProduct() throws SQLException, ClassNotFoundException {
-        barChart.getData().clear();
-        barChart.setLegendVisible(false);
-        xAxis.setLabel("Anzahl Produkte");
-        yAxis.setLabel("Kategorie");
-        yAxis.tickLabelFontProperty().set(Font.font(9));
-        XYChart.Series dataSeries = new XYChart.Series();
-        DBUtil.dbConnect();
-        HashMap<String,Integer> list = DBUtil.getListProductCategory();
-        DBUtil.dbDisconnect();
-        for (String key : list.keySet()){
-            dataSeries.getData().add(new XYChart.Data(key, list.get(key)));
-        }
-        barChart.getData().add(dataSeries);
     }
 }

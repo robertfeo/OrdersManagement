@@ -72,7 +72,7 @@
                <children>
                           <HBox alignment="CENTER" prefHeight="116.0" prefWidth="751.0" spacing="25.0">
                               <children>
-                                  <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#connectToDatabase" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
+                                  <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
                               </children>
                           </HBox>
                   <HBox prefHeight="356.0" prefWidth="751.0">
@@ -83,7 +83,7 @@
                             <TableColumn prefWidth="75.0" text="C2" />
                           </columns>
                         </TableView>
-                                  <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#disconnectFromDatabase" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
+                                  <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

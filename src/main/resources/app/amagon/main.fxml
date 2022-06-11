@@ -132,7 +132,7 @@
                   </VBox>
                </children>
             </HBox>
-            <BarChart fx:id="barChart" barGap="8.0" prefHeight="257.0" prefWidth="881.0" title="Anzahl Produkte nach Kategorie">
+            <BarChart fx:id="barChart" animated="false" barGap="8.0" prefHeight="257.0" prefWidth="881.0" title="Anzahl Produkte nach Kategorie">
                <xAxis>
                   <CategoryAxis fx:id="yAxis" side="BOTTOM" />
                </xAxis>

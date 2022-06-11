@@ -92,7 +92,7 @@
                                     </Text>
                                     <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="458.0">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="46.0">
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="71.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -100,7 +100,7 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Text>
-                                          <TextField fx:id="txfSearchCustomerByName" prefHeight="30.0" prefWidth="160.0">
+                                          <TextField fx:id="txfSearchCustomerByName" prefHeight="30.0" prefWidth="145.0">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -204,11 +204,11 @@
                                         <children>
                                             <TableView fx:id="customerTable" onMouseClicked="#clickRowCustomer" prefHeight="355.0" prefWidth="595.0">
                                                 <columns>
-                                                        <TableColumn fx:id="tbCustomerID" maxWidth="68.0" minWidth="68.0" prefWidth="68.0" text="ID" />
-                                                        <TableColumn fx:id="tbCustomerSurname" minWidth="0.0" prefWidth="108.0" text="Name" />
-                                                          <TableColumn fx:id="tbCustomerName" prefWidth="75.0" text="Vorname" />
-                                                          <TableColumn fx:id="tbCustomerAddress" prefWidth="75.0" text="Adresse" />
-                                                          <TableColumn fx:id="tbCustomerCity" prefWidth="75.0" text="Stadt" />
+                                                        <TableColumn fx:id="tbCustomerID" maxWidth="80.0" minWidth="80.0" text="Kunden-ID" />
+                                                        <TableColumn fx:id="tbCustomerSurname" minWidth="0.0" prefWidth="120.0" text="Nachname" />
+                                                          <TableColumn fx:id="tbCustomerName" minWidth="112.0" prefWidth="112.0" text="Vorname" />
+                                                          <TableColumn fx:id="tbCustomerAddress" prefWidth="139.0" text="Adresse" />
+                                                          <TableColumn fx:id="tbCustomerCity" prefWidth="140.0" text="Stadt" />
                                                 </columns>
                                                <columnResizePolicy>
                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -233,7 +233,7 @@
                                  <children>
                                     <VBox prefHeight="120.0" prefWidth="219.0" spacing="5.0">
                                        <children>
-                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="250.0">
+                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="250.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
