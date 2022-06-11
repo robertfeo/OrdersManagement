@@ -20,11 +20,11 @@ VALUES
     ('Stefanie', 'Drescher', 'Schaarsteinweg 53', N'Mötzing');
 
 INSERT INTO [amagon].[product]
-VALUES ('LED Strip 20m', 'Beleuchtung', '29.99', 4),
-       ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', N'Computer & Zubehör', '1751.01', 2),
-       ('Samsung 980 PRO 1 TB PCIe 4.0', N'Computer & Zubehör', '133.90', 4),
-       ('Arcon 207X Kompatibel Tonerkartusche', 'Drucker & Patronen', '131.99', 7),
-       ('SanDisk 128 GB Ultra microSD', N'Computer & Zubehör', '14.99', 12),
-       ('Office 2021 Home und Student Multilingual', 'Software', '88.00', 21),
-       ('Siemens Kaffeevollautomat EQ.500', N'Haushalt & Wohnen', '618.75', 6),
-       ('Schreibtisch-Winkelkombination Tisch', N'Haushalt & Wohnen', '148.99', 3);
+VALUES ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', 'Grafikkarten', '1751.01', 7),
+       ('12GB MSI GeForce RTX 3060 Ventus 2X', 'Grafikkarten', '429', 12),
+       ('Samsung 980 PRO 1 TB PCIe 4.0', 'Solid State Drives (SSD)', '133.90', 9),
+       ('750 Watt be quiet!', 'Netzteile (PSU)', '131.99', 7),
+       ('SanDisk 128 GB Ultra microSD', 'Speicherkarten', '111.90', 14),
+       ('16GB G.Skill RipJaws V schwarz DDR4-3200','Arbeitsspeicher (RAM)', '62.47', 23),
+       ('NZXT Kraken X63','Kühlung Wasser(WaKü)', '133.70', 23),
+       ('MSI Tomahawk WIFI Intel B660 So. 1700 Dual Channel DDR4','Mainboards', '206.99', 17);

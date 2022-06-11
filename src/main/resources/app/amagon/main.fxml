@@ -72,7 +72,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <VBox fx:id="pnItems" alignment="CENTER" layoutX="251.0" layoutY="232.0" prefHeight="444.0" prefWidth="918.0" spacing="25.0" style="-fx-background-color: #ffff;">
+      <VBox fx:id="pnItems" alignment="CENTER" layoutX="251.0" layoutY="119.0" prefHeight="557.0" prefWidth="918.0" spacing="25.0" style="-fx-background-color: #ffff;">
          <children>
             <HBox alignment="CENTER" prefHeight="123.0" prefWidth="815.0" spacing="25.0">
                <children>
@@ -113,20 +113,43 @@
                         </Label>
                      </children>
                   </VBox>
+                  <VBox prefHeight="150.0" prefWidth="245.0" styleClass="main-info-box" stylesheets="@style.css">
+                     <children>
+                        <Label fx:id="lbNumberProducts" alignment="CENTER" prefHeight="54.0" prefWidth="259.0" text="-" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="309.0" text="Lagerbestände" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
-            <Button fx:id="btnCustomerNrRefresh" alignment="CENTER" mnemonicParsing="false" onAction="#refreshDataMain" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE" />
-            <BarChart fx:id="barChart" prefHeight="236.0" prefWidth="850.0">
+            <BarChart fx:id="barChart" barGap="8.0" prefHeight="257.0" prefWidth="881.0" title="Anzahl Produkte nach Kategorie">
                <xAxis>
                   <CategoryAxis fx:id="yAxis" side="BOTTOM" />
                </xAxis>
                <yAxis>
-                  <NumberAxis side="LEFT" fx:id="xAxis" />
+                  <NumberAxis side="LEFT" fx:id="xAxis">
+                     <tickLabelFont>
+                        <Font size="9.0" />
+                     </tickLabelFont></NumberAxis>
                </yAxis>
-               <padding>
-                  <Insets right="25.0" />
-               </padding>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
             </BarChart>
+            <Button fx:id="btnCustomerNrRefresh" alignment="CENTER" mnemonicParsing="false" onAction="#refreshDataMain" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Button>
          </children>
       </VBox>
    </children>

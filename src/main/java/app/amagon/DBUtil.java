@@ -242,6 +242,42 @@ public class DBUtil {
         return total;
     }
 
+    public static int getTotalProducts() throws SQLException {
+        int total = 0;
+        try {
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("select [amagon].[getTotalProducts]() as total");
+                rs = p_stmt.executeQuery();
+                while(rs.next()){
+                    total = rs.getInt(rs.findColumn("total"));
+                    System.out.println(total);
+                }
+            } else {
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+        return total;
+    }
+
     /*public static int getTotalProductsCategory(String category) throws SQLException {
         int total = 0;
         try {
@@ -467,14 +503,15 @@ public class DBUtil {
         }
     }
 
-    public static void editProduct(int ID,String ProductName, String ProductCategory, String Price) throws SQLException{
+    public static void editProduct(int ID,String ProductName, String ProductCategory, String Price, String Quantity) throws SQLException{
         try{
             if (!db_connection.isClosed()) {
-                p_stmt = db_connection.prepareStatement("exec [amagon].[editProduct] ?,?,?,?");
+                p_stmt = db_connection.prepareStatement("exec [amagon].[editProduct] ?,?,?,?,?");
                 p_stmt.setInt(1, ID);
                 p_stmt.setString(2, ProductName);
                 p_stmt.setString(3, ProductCategory);
                 p_stmt.setBigDecimal(4, BigDecimal.valueOf(Double.parseDouble(Price)));
+                p_stmt.setInt(4, Integer.getInteger(Quantity));
                 p_stmt.execute();
             }
             else{

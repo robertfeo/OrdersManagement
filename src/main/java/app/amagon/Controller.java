@@ -1,9 +1,14 @@
 package app.amagon;
 
 import app.amagon.entities.Product;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,8 +18,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
@@ -75,6 +80,7 @@ public class Controller{
     public Button btnDeleteProduct;
     public TableColumn<Product, Integer> tbProductQuantity;
     public TextField txfProductQuantity;
+    public Label lbNumberProducts;
     double x,y;
     @FXML
     public Label lbNumberOrders;
@@ -230,7 +236,6 @@ public class Controller{
         tbProductQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         productTable.setItems(DBUtil.getProductList());
         DBUtil.dbDisconnect();
-        refreshBarChartProduct();
     }
 
     public void refreshCustomerChoiceList() throws SQLException, ClassNotFoundException {
@@ -256,24 +261,33 @@ public class Controller{
     public void refreshDataMain() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         lbRegisteredCustomer.setText(Integer.toString(DBUtil.getTotalCustomers()));
-        refreshBarChartProduct();
         DBUtil.dbDisconnect();
+        DBUtil.dbConnect();
+        lbNumberProducts.setText(Integer.toString(DBUtil.getTotalProducts()));
+        DBUtil.dbDisconnect();
+        refreshBarChartProduct();
+        refreshBarChartProduct();
+        refreshBarChartProduct();
+        refreshBarChartProduct();
     }
 
     public void saveEditProductToDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try{
-            for (Product p : DBUtil.getProductList()) {
+            /*for (Product p : DBUtil.getProductList()) {
                 if (Objects.equals(p.getProductName(), txfProductName.getText())
                         && Objects.equals(p.getCategory(), txfProductCategory.getText())
                         && Objects.equals(String.valueOf(p.getPrice()), txfProductPrice.getText())){
                     System.out.println(p.getProductId());
                 }
-                else{ System.out.println("nicht gefunden"); }
-            }
+            }*/
             try{
                 DBUtil.dbConnect();
-                DBUtil.editProduct(productTable.getSelectionModel().getSelectedItem().getProductId(),txfProductName.getText(),txfProductCategory.getText(),txfProductPrice.getText());
+                DBUtil.editProduct(productTable.getSelectionModel().getSelectedItem().getProductId(),
+                        txfProductName.getText(),
+                        txfProductCategory.getText(),
+                        txfProductPrice.getText(),
+                        txfProductID.getText());
                 DBUtil.dbDisconnect();
             }catch(NullPointerException ignored){}
             this.refreshProductTable();
@@ -283,7 +297,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
-    public void clickRowCustomer(MouseEvent mouseEvent) {
+    public void clickRowCustomer() {
         try{
             txfSurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
             txfName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
@@ -294,7 +308,7 @@ public class Controller{
         }catch(NullPointerException ignored){}
     }
 
-    public void clickRowProduct(MouseEvent mouseEvent){
+    public void clickRowProduct(){
         try{
             txfProductName.setText(productTable.getSelectionModel().getSelectedItem().getProductName());
             txfProductCategory.setText(productTable.getSelectionModel().getSelectedItem().getCategory());
@@ -308,13 +322,13 @@ public class Controller{
         barChart.getData().clear();
         barChart.setLegendVisible(false);
         xAxis.setLabel("Anzahl Produkte");
+        yAxis.setLabel("Kategorie");
         yAxis.tickLabelFontProperty().set(Font.font(9));
         XYChart.Series dataSeries = new XYChart.Series();
         DBUtil.dbConnect();
         HashMap<String,Integer> list = DBUtil.getListProductCategory();
         DBUtil.dbDisconnect();
         for (String key : list.keySet()){
-            System.out.println(key + " " + list.get(key));
             dataSeries.getData().add(new XYChart.Data(key, list.get(key)));
         }
         barChart.getData().add(dataSeries);
