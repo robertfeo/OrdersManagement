@@ -135,7 +135,7 @@ public class Controller{
     @FXML
     private Scene scene;
 
-    //  CHANGE TO MAIN SCENE
+    //  WECHSELN ZUR SZENE ÜBERSICHT
     public void mainScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -152,7 +152,7 @@ public class Controller{
         stage.show();
     }
 
-    //  CHANGE TO ORDER SCENE
+    //  WECHSELN ZUR SZENE BESTELLUNGEN
     public void orderScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/bestellungen.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -169,7 +169,7 @@ public class Controller{
         stage.show();
     }
 
-    //  CHANGE TO CUSTOMERS SCENE
+    //  WECHSELN ZUR SZENE KUNDEN
     public void customerScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/kunden.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -186,6 +186,7 @@ public class Controller{
         stage.show();
     }
 
+    //  WECHSELN ZUR SZENE PRODUKTE
     public void productsScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/produkte.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -202,6 +203,7 @@ public class Controller{
         stage.show();
     }
 
+    //  PROGRAMM BEENDEN
     public void exitProgram(@NotNull ActionEvent event) throws SQLException {
         final Node source = (Node)event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
@@ -209,6 +211,7 @@ public class Controller{
         stage.close();
     }
 
+    //  FÜGE KUNDEN ZUM DATENBANK HINZU UND AKTUALLIESIERE KUNDENTABELLE
     public void addCustomerToDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try{
@@ -220,6 +223,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  FÜGE PRODUKT ZUM DATENBANK HINZU UND AKTUALLIESIERE KUNDENTABELLE
     public void addProductToDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try{
@@ -231,6 +235,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  LÖSCHE KUNDE AUS DER DATENBANK
     public void deleteCustomerFromDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try{
@@ -242,6 +247,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  LÖSCHE PRODUKT AUS DER DATENBANK
     public void deleteProductFromDatabase() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try{
@@ -253,6 +259,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  AKTUALLISIERE KUNDENTABELLE
     public void refreshCustomerTable() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         tbCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -265,6 +272,7 @@ public class Controller{
         refreshCustomerChoiceList();
     }
 
+    //  AKTUALISIERE PRODUKTTABELLE
     public void refreshProductTable() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         tbProductID.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -276,12 +284,14 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  AKTUALISIERE AUSWAHLLISTE, MIT DER EIN KUNDE GEFUNDEN WERDEN KANN
     public void refreshCustomerChoiceList() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         cbCustomerID.setItems(DBUtil.getCustomerIDs());
         DBUtil.dbDisconnect();
     }
 
+    //  AKTUALISIERE BALKENDIAGRAMM MIT DER ANZAHL DER PRODUKTE SORTIERT NACH KATEGORIE
     public void refreshBarChartProduct() throws SQLException, ClassNotFoundException {
         barChart.getData().clear();
         barChart.setLegendVisible(false);
@@ -298,6 +308,7 @@ public class Controller{
         barChart.getData().add(dataSeries);
     }
 
+    //  AKTUALISIERE ALLE DATEN IN DER ÜBERSICHT SZENE
     public void refreshDataMain() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         lbRegisteredCustomer.setText(Integer.toString(DBUtil.getTotalCustomers()));
@@ -311,6 +322,7 @@ public class Controller{
         refreshBarChartProduct();
     }
 
+    //  SUCHE NACH EINEM SPEZIFISCHEN KUNDEN IN DER DATENBANK
     public void searchCustomer() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         try {
@@ -346,6 +358,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  SUCHE NACH EINER SPEZIFISCHEN BESTELLUNG IN DER DATENBANK
     public void searchOrder() throws SQLException, ClassNotFoundException {
         Order customerOrder = new Order();
         if (!txfCustomerNr.getText().isEmpty()){
@@ -367,6 +380,7 @@ public class Controller{
         showInvoiceItems();
     }
 
+    //  ZEIGE DIE POSITIONSTABELLE FÜR EINEN SPEZIFISCHEN KUNDEN
     public void showInvoiceItems() throws SQLException, ClassNotFoundException {
         tbPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         tbItemID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
@@ -377,6 +391,7 @@ public class Controller{
         invoiceItemsTable.setItems(DBUtil.getInvoiceItemsListByCustomerID(txfCustomerNr.getText()));
     }
 
+    //  SPEICHERE LOKAL GEÄNDERTE ZEILE IN DER DATENBANK
     public void saveEditProductToDatabase() throws SQLException, ClassNotFoundException, NumberFormatException{
         DBUtil.dbConnect();
         try{
@@ -396,6 +411,7 @@ public class Controller{
         DBUtil.dbDisconnect();
     }
 
+    //  INTERPRETIERE MOUSE-CLICK VON EINER ZEILE IN DER KUNDENTABELLE
     public void clickRowCustomer() {
         try{
             txfSurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
@@ -408,6 +424,7 @@ public class Controller{
         }catch(NullPointerException | SQLException | ClassNotFoundException ignored){}
     }
 
+    //  INTERPRETIERE MOUSE-CLICK VON EINER ZEILE IN DER KUNDENTABELLE
     public void clickRowProduct(){
         try{
             txfProductName.setText(productTable.getSelectionModel().getSelectedItem().getProductName());
