@@ -154,7 +154,10 @@
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Text>
-                                    <Text fx:id="txtTotalPriceOrder" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
+                                    <Text fx:id="txtTotalPriceOrder" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Text>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />

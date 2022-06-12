@@ -367,6 +367,7 @@ public class Controller{
             for (Order order : DBUtil.getOrderListByCustomerID(txfCustomerNr.getText())){
                 customerOrder = order;
             }
+            showInvoiceItems();
             DBUtil.dbDisconnect();
         }
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -377,7 +378,6 @@ public class Controller{
         DBUtil.dbConnect();
         txtTotalPriceOrder.setText(String.valueOf(DBUtil.getTotalInvoicePrice(customerOrder.getCustomerId())) + " €");
         DBUtil.dbDisconnect();
-        showInvoiceItems();
     }
 
     //  ZEIGE DIE POSITIONSTABELLE FÜR EINEN SPEZIFISCHEN KUNDEN
