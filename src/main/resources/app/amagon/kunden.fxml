@@ -93,9 +93,6 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="458.0">
                                        <children>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="71.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -106,9 +103,6 @@
                                              </HBox.margin>
                                           </TextField>
                                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="RIGHT" wrappingWidth="27.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
                                              <HBox.margin>
                                                 <Insets left="5.0" right="5.0" />
                                              </HBox.margin>
@@ -135,60 +129,33 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="149.0" prefWidth="390.0" styleClass="main-info-box" stylesheets="@style.css">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Weitere Kundeninformationen" textAlignment="CENTER" wrappingWidth="320.0">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestellung" textAlignment="CENTER" wrappingWidth="361.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <HBox fx:id="lblOrderNr" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
+                              <HBox fx:id="lblOrderNr" alignment="CENTER" prefHeight="35.0" prefWidth="483.0">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestellungsnr" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestellungsnummer" wrappingWidth="145.0" />
+                                    <Text fx:id="txtOrderNrCustomerScene" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
+                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="483.0">
                                  <children>
-                                    <Text fx:id="lblOrderDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestelldatum" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
+                                    <Text fx:id="lblOrderDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestelldatum" wrappingWidth="145.0" />
+                                    <Text fx:id="txtOrderDateCustomerScene" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="483.0">
+                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="483.0">
                                  <children>
-                                    <Text fx:id="lblTotalPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtwert" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
+                                    <Text fx:id="lblTotalPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtwert" wrappingWidth="145.0" />
+                                    <Text fx:id="txtOrderTotalCustomerScene" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="145.0" />
                                  </children>
                               </HBox>
                            </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
-                           <padding>
-                              <Insets left="25.0" />
-                           </padding>
                         </VBox>
                      </children>
                   </HBox>
@@ -236,17 +203,9 @@
                                  <children>
                                     <VBox prefHeight="120.0" prefWidth="219.0" spacing="5.0">
                                        <children>
-                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="250.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
+                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="250.0" />
                                           <TextField fx:id="txfSurname" prefHeight="30.0" prefWidth="250.0" />
-                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname" wrappingWidth="250.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
+                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname" wrappingWidth="250.0" />
                                           <TextField fx:id="txfName" prefHeight="30.0" prefWidth="250.0" />
                                        </children>
                                        <padding>
@@ -255,17 +214,9 @@
                                     </VBox>
                                     <VBox prefHeight="122.0" prefWidth="218.0" spacing="5.0">
                                        <children>
-                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" wrappingWidth="250.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
+                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" wrappingWidth="250.0" />
                                           <TextField fx:id="txfAddress" prefHeight="30.0" prefWidth="250.0" />
-                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Stadt" wrappingWidth="250.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
+                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Stadt" wrappingWidth="250.0" />
                                           <TextField fx:id="txfCity" prefHeight="30.0" prefWidth="250.0" />
                                        </children>
                                        <padding>
@@ -283,11 +234,7 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="237.0" spacing="25.0">
                                        <children>
-                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="CENTER" wrappingWidth="16.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
+                                          <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="CENTER" wrappingWidth="16.0" />
                                           <TextField fx:id="txfDeleteByID" prefHeight="30.0" prefWidth="73.0">
                                              <HBox.margin>
                                                 <Insets left="-20.0" />

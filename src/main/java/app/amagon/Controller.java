@@ -106,7 +106,19 @@ public class Controller{
     public TableColumn<InvoiceItem,Integer> tbPriceItem;
     @FXML
     public TableColumn<InvoiceItem,Integer> tbTotalPriceItem;
+    @FXML
     public TableView<InvoiceItem> invoiceItemsTable;
+    @FXML
+    public Text txtTotalPriceOrder;
+    @FXML
+    public CheckBox cbHasOrder;
+    @FXML
+    public Text txtOrderNrCustomerScene;
+    @FXML
+    public Text txtOrderDateCustomerScene;
+    @FXML
+    public Text txtOrderTotalCustomerScene;
+    @FXML
     double x,y;
     @FXML
     public Label lbNumberOrders;
@@ -312,8 +324,23 @@ public class Controller{
                 }
             } else if (cbCustomerID.getSelectionModel().isEmpty() && !txfSearchCustomerBySurname.getText().isEmpty()) {
                 DBUtil.getCustomerBySurname(txfSearchCustomerBySurname.getText());
-            }else{
+            }else {
                 refreshCustomerTable();
+            }
+            if (cbHasOrder.isSelected() && !cbCustomerID.getSelectionModel().isEmpty()){
+                for(Order order : DBUtil.getOrderListByCustomerID(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()))){
+                    if (order.getCustomerId() == cbCustomerID.getSelectionModel().getSelectedItem()){
+                        txtOrderNrCustomerScene.setText(String.valueOf(order.getOrderId()));
+                        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                        txtOrderDateCustomerScene.setText(dateFormat.format(order.getOrderDate()));
+                        DBUtil.dbConnect();
+                        txtOrderTotalCustomerScene.setText(String.valueOf(DBUtil.getTotalInvoicePrice(order.getCustomerId())) + " €");
+                        DBUtil.dbDisconnect();
+                    }
+                    else{
+                        break;
+                    }
+                }
             }
         }catch(Exception ignored){}
         DBUtil.dbDisconnect();
@@ -326,7 +353,6 @@ public class Controller{
             DBUtil.getOrderByCustomerID(txfCustomerNr.getText());
             for (Order order : DBUtil.getOrderListByCustomerID(txfCustomerNr.getText())){
                 customerOrder = order;
-                System.out.println(order.toString());
             }
             DBUtil.dbDisconnect();
         }
@@ -335,6 +361,9 @@ public class Controller{
         txtOrderNr.setText(String.valueOf(customerOrder.getOrderId()));
         txtCustomerNr.setText(String.valueOf(customerOrder.getCustomerId()));
         txfOrderNr.setText(String.valueOf(customerOrder.getOrderId()));
+        DBUtil.dbConnect();
+        txtTotalPriceOrder.setText(String.valueOf(DBUtil.getTotalInvoicePrice(customerOrder.getCustomerId())) + " €");
+        DBUtil.dbDisconnect();
         showInvoiceItems();
     }
 
@@ -375,7 +404,8 @@ public class Controller{
             txfCity.setText(customerTable.getSelectionModel().getSelectedItem().getCity());
             txfSearchCustomerBySurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
             cbCustomerID.getSelectionModel().select(customerTable.getSelectionModel().getSelectedItem().getCustomerId()-1);
-        }catch(NullPointerException ignored){}
+            showInvoiceItems();
+        }catch(NullPointerException | SQLException | ClassNotFoundException ignored){}
     }
 
     public void clickRowProduct(){

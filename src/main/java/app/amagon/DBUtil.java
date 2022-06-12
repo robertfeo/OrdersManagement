@@ -318,6 +318,42 @@ public class DBUtil {
         return total;
     }
 
+    public static double getTotalInvoicePrice(int customerID) throws SQLException {
+        int total = 0;
+        try {
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("select [amagon].[getInvoiceTotal](?) as total");
+                p_stmt.setString(1,String.valueOf(customerID));
+                rs = p_stmt.executeQuery();
+                while(rs.next()){
+                    total = rs.getInt(rs.findColumn("total"));
+                }
+            } else {
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+        return total;
+    }
+
     public static HashMap<String,Integer> getListProductCategory() throws SQLException {
         HashMap<String, Integer> listNumberProductCategories = new HashMap<>();
         try {
