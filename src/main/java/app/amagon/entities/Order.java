@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Order {
@@ -12,12 +13,15 @@ public class Order {
     @Id
     @Column(name = "order_id", nullable = false)
     private int orderId;
+
     @Basic
     @Column(name = "order_date", nullable = false)
     private Date orderDate;
+
     @Basic
     @Column(name = "customer_id", nullable = false)
     private int customerId;
+
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     private Customer customer;
@@ -53,14 +57,10 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Order order = (Order) o;
-
         if (orderId != order.orderId) return false;
         if (customerId != order.customerId) return false;
-        if (orderDate != null ? !orderDate.equals(order.orderDate) : order.orderDate != null) return false;
-
-        return true;
+        return Objects.equals(orderDate, order.orderDate);
     }
 
     @Override

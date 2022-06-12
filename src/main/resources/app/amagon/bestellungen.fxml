@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1173.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.amagon.Controller">
     <children>
@@ -66,38 +68,110 @@
                 <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.0175" spread="0.32" width="18.07" />
             </effect>
         </VBox>
-        <VBox fx:id="pnItems" layoutX="319.0" layoutY="147.0" prefHeight="446.0" prefWidth="751.0" style="-fx-background-color: #ffff;">
+        <VBox fx:id="pnItems" layoutX="250.0" layoutY="94.0" prefHeight="578.0" prefWidth="923.0" style="-fx-background-color: #ffff;">
             <children>
-                  <VBox alignment="CENTER" prefHeight="382.0" prefWidth="751.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="275.0" prefWidth="923.0" spacing="15.0">
                <children>
-                          <HBox alignment="CENTER" prefHeight="116.0" prefWidth="751.0" spacing="25.0">
-                              <children>
-                                  <Button fx:id="btnDbConnect" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
-                              </children>
-                          </HBox>
-                  <HBox prefHeight="356.0" prefWidth="751.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="275.0" prefWidth="396.0" spacing="10.0" stylesheets="@style.css">
                      <children>
-                        <TableView prefHeight="100.0" prefWidth="365.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
-                                  <Button fx:id="btnDbDisconnect" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" stylesheets="@style.css" text="Trennen" textAlignment="CENTER" textFill="WHITE" />
+                        <VBox alignment="CENTER" prefHeight="177.0" prefWidth="396.0" stylesheets="@style.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundennummer" wrappingWidth="119.0" />
+                                    <TextField fx:id="txfCustomerNr" prefHeight="30.0" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungsnummer" wrappingWidth="120.0" />
+                                    <TextField fx:id="txfOrderNr" prefHeight="30.0" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="405.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" stylesheets="@style.css" text="Stornieren" textAlignment="CENTER" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="275.0" prefWidth="396.0" spacing="10.0" stylesheets="@style.css">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="242.0" prefWidth="405.0" styleClass="main-info-box" stylesheets="@style.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="38.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnung" textAlignment="CENTER" wrappingWidth="405.0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundennummer" wrappingWidth="140.0" />
+                                    <Text fx:id="txtCustomerNr" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungsnummer" wrappingWidth="140.0" />
+                                    <Text fx:id="txtOrderNr" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungsdatum" wrappingWidth="140.0" />
+                                    <Text fx:id="txtOrderDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="enthaltene MwSt(19%)" wrappingWidth="140.0" />
+                                    <Text fx:id="txtTax" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="249.0" prefWidth="923.0" spacing="10.0">
+               <children>
+                          <HBox alignment="CENTER" prefHeight="247.0" prefWidth="923.0" spacing="25.0">
+                     <children>
+                        <TableView prefHeight="250.0" prefWidth="824.0">
+                          <columns>
+                            <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Position" />
+                            <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Artikelnummer" />
+                              <TableColumn prefWidth="249.0" text="Artikelbezeichnung" />
+                              <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Anzahl" />
+                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Listenpreis" />
+                              <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Gesamtbetrag" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                          </HBox>
                </children>
                   </VBox>
-                <VBox prefHeight="100.0" prefWidth="129.0" />
             </children>
         </VBox>
-      <Label layoutX="246.0" layoutY="24.0" prefHeight="75.0" prefWidth="829.0" text="Bestellungen" textFill="#5667fd">
+      <Label alignment="CENTER" layoutX="246.0" layoutY="14.0" prefHeight="65.0" prefWidth="929.0" text="Bestellungen" textFill="#5667fd">
          <font>
             <Font size="36.0" />
          </font>
-         <padding>
-            <Insets left="75.0" />
-         </padding>
       </Label>
     </children>
 </AnchorPane>

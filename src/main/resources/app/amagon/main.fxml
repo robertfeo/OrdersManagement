@@ -132,24 +132,26 @@
                   </VBox>
                </children>
             </HBox>
-            <BarChart fx:id="barChart" animated="false" barGap="8.0" prefHeight="257.0" prefWidth="881.0" title="Anzahl Produkte nach Kategorie">
-               <xAxis>
-                  <CategoryAxis fx:id="yAxis" side="BOTTOM" />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis side="LEFT" fx:id="xAxis">
-                     <tickLabelFont>
-                        <Font size="9.0" />
-                     </tickLabelFont></NumberAxis>
-               </yAxis>
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
-            </BarChart>
             <Button fx:id="btnCustomerNrRefresh" alignment="CENTER" mnemonicParsing="false" onAction="#refreshDataMain" prefHeight="35.0" prefWidth="125.0" stylesheets="@style.css" text="Aktualisieren" textAlignment="CENTER" textFill="WHITE">
                <VBox.margin>
                   <Insets />
                </VBox.margin></Button>
+            <HBox alignment="CENTER" prefHeight="278.0" prefWidth="918.0">
+               <children>
+                  <BarChart fx:id="barChart" animated="false" barGap="8.0" prefHeight="278.0" prefWidth="809.0" title="Anzahl Produkte nach Kategorie">
+                     <xAxis>
+                        <CategoryAxis fx:id="yAxis" side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" fx:id="xAxis">
+                           <tickLabelFont>
+                              <Font size="9.0" />
+                           </tickLabelFont>
+                        </NumberAxis>
+                     </yAxis>
+                  </BarChart>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

@@ -29,7 +29,7 @@
 
 .main-info-box{
     /*-fx-background-color: rgba(131, 146, 255, 1.0);*/
-    -fx-background-color:#5667FD;
+    -fx-background-color: #5667FD;
     -fx-background-insets: 0,1,2,3;
     -fx-background-radius: 5px;
 }

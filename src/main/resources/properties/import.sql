@@ -1,9 +1,13 @@
+DELETE FROM [amagon].[order_item] WHERE [order_id] > 0;
+DELETE FROM [amagon].[order] WHERE [order_id] > 0;
 DELETE FROM [amagon].[customer] WHERE [customer_id] > 0;
 DELETE FROM [amagon].[product] WHERE [product_id] > 0;
 
 -- RESET SEED/AUTO INCREMENT
 DBCC CHECKIDENT ('[amagon].[customer]', RESEED, 0)
 DBCC CHECKIDENT ('[amagon].[product]', RESEED, 0)
+DBCC CHECKIDENT ('[amagon].[order]', RESEED, 0)
+DBCC CHECKIDENT ('[amagon].[order_item]', RESEED, 0)
 
 INSERT INTO [amagon].[customer]
 VALUES
@@ -28,3 +32,11 @@ VALUES ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', 'Grafikkarten', '1751.01', 7),
        ('16GB G.Skill RipJaws V schwarz DDR4-3200','Arbeitsspeicher (RAM)', '62.47', 23),
        ('NZXT Kraken X63','Kühlung Wasser(WaKü)', '133.70', 23),
        ('MSI Tomahawk WIFI Intel B660 So. 1700 Dual Channel DDR4','Mainboards', '206.99', 17);
+
+INSERT INTO [amagon].[order]
+VALUES (CAST(GETDATE() AS Date),4),
+       (CAST(GETDATE() AS Date),8);
+
+INSERT INTO [amagon].[order_item]
+VALUES (1,2,1,0),
+       (2,4,2,0);

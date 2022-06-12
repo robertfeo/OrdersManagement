@@ -1,14 +1,9 @@
 package app.amagon;
 
 import app.amagon.entities.Product;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +11,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
@@ -73,10 +67,15 @@ public class Controller{
     public CategoryAxis yAxis;
     @FXML
     public NumberAxis xAxis;
+    @FXML
     public TextField txfProductID;
+    @FXML
     public Button btnDeleteProduct;
+    @FXML
     public TableColumn<Product, Integer> tbProductQuantity;
+    @FXML
     public TextField txfProductQuantity;
+    @FXML
     public Label lbNumberProducts;
     double x,y;
     @FXML

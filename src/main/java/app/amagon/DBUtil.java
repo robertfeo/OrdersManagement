@@ -4,7 +4,6 @@ import app.amagon.entities.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import app.amagon.entities.Customer;
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Objects;

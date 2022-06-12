@@ -10,18 +10,23 @@ public class Customer {
     @Id
     @Column(name = "customer_id", nullable = false)
     private int customerId;
+
     @Basic
     @Column(name = "surname", nullable = false, length = 255)
     private String surname;
+
     @Basic
     @Column(name = "name", nullable = false, length = 255)
     private String name;
+
     @Basic
     @Column(name = "address", nullable = false, length = 255)
     private String address;
+
     @Basic
     @Column(name = "city", nullable = false, length = 255)
     private String city;
+
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
