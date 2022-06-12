@@ -25,8 +25,10 @@ public class DBUtil {
 
     private static ObservableList<Order> orderList;
 
+    //  LISTE MIT DEN POSITIONEN FÜR EINE SPEZIFISCHE RECHNUNG
     private static List<OrderItem> orderItemsList;
 
+    //  LISTE MIT ALLEN RECHNUNGSPOSITIONEN FÜR EIN KUNDE
     private static ObservableList<InvoiceItem> invoiceItemsList;
 
     public static void dbConnect() throws SQLException, ClassNotFoundException{
@@ -61,6 +63,7 @@ public class DBUtil {
         }
     }
 
+    //  LESE KUNDEN AUS DER DATENBANK UND SPEICHERE IN EINER LISTE customerList
     private static void getCustomerData() throws SQLException {
         customerList = FXCollections.observableArrayList();
         try{
@@ -108,6 +111,7 @@ public class DBUtil {
         }
     }
 
+    //  LESE ALLE PRODUKTE AUS DER DATENBANK UND SPEICHERE IN EINER LISTE productList
     private static void getProductData() throws SQLException {
         productList = FXCollections.observableArrayList();
         try{
@@ -173,6 +177,7 @@ public class DBUtil {
         return customerList;
     }
 
+    //  LESE ALLE KUNDEN-ID AUS DER DATENBANK; VERWENDUNG: CHOICEBOX(KUNDENIDs) BEI DER KUNDENSUCHE
     public static ObservableList<Integer> getCustomerIDs() throws SQLException {
         ObservableList<Integer> customerIDs = FXCollections.observableArrayList();
         try{
@@ -213,6 +218,7 @@ public class DBUtil {
         return customerIDs;
     }
 
+    //  BERECHNE GESAMTANZAHL AN KUNDEN IN DER DATENBANK
     public static int getTotalCustomers() throws SQLException {
         int total = 0;
         try {
@@ -248,6 +254,7 @@ public class DBUtil {
         return total;
     }
 
+    //  BERECHNE GESAMTANZAHL AN PRODUKTEN IN DER DATENBANK
     public static int getTotalProducts() throws SQLException {
         int total = 0;
         try {
@@ -283,6 +290,7 @@ public class DBUtil {
         return total;
     }
 
+    //  BERECHNE GESAMTANZAHL AN BESTELLUNGEN IN DER DATENBANK
     public static int getTotalOrders() throws SQLException {
         int total = 0;
         try {
@@ -318,6 +326,7 @@ public class DBUtil {
         return total;
     }
 
+    //  BERECHNE GESAMTPREIS FÜR EINE RECHNUNG NACH KUNDEN-ID
     public static double getTotalInvoicePrice(int customerID) throws SQLException {
         int total = 0;
         try {
@@ -354,6 +363,7 @@ public class DBUtil {
         return total;
     }
 
+    //  LESE NUR DIE PRODUKTKATEGORIEN UND AUS DER DATENBANK
     public static HashMap<String,Integer> getListProductCategory() throws SQLException {
         HashMap<String, Integer> listNumberProductCategories = new HashMap<>();
         try {
@@ -684,6 +694,7 @@ public class DBUtil {
         return orderItemsList;
     }
 
+    //  LESE ALLE POSITIONEN FÜR EINE SPEZIFISCHE RECHNUNG NACH ID
     public static void getOrderItemsByOrderID(String orderID) throws SQLException {
         orderItemsList = FXCollections.observableArrayList();
         orderItemsList.clear();
