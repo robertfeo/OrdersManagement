@@ -1,5 +1,6 @@
 package app.amagon;
 
+import app.amagon.entities.InvoiceItem;
 import app.amagon.entities.Order;
 import app.amagon.entities.Product;
 import javafx.event.ActionEvent;
@@ -17,7 +18,6 @@ import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -82,12 +82,30 @@ public class Controller{
     public TextField txfProductQuantity;
     @FXML
     public Label lbNumberProducts;
+    @FXML
     public TextField txfCustomerNr;
+    @FXML
     public TextField txfOrderNr;
+    @FXML
     public Text txtCustomerNr;
+    @FXML
     public Text txtOrderNr;
+    @FXML
     public Text txtOrderDate;
+    @FXML
     public Text txtTax;
+    @FXML
+    public TableColumn<InvoiceItem,Integer> tbPosition;
+    @FXML
+    public TableColumn<InvoiceItem,Integer> tbItemID;
+    @FXML
+    public TableColumn<InvoiceItem,Integer> tbItemDescription;
+    @FXML
+    public TableColumn<InvoiceItem,Integer> tbNumberItems;
+    @FXML
+    public TableColumn<InvoiceItem,Integer> tbPriceItem;
+    @FXML
+    public TableColumn<InvoiceItem,Integer> tbTotalPriceItem;
     double x,y;
     @FXML
     public Label lbNumberOrders;
