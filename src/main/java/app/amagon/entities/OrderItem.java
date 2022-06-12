@@ -20,19 +20,21 @@ public class OrderItem {
 
     @Basic
     @Column(name = "quantity", nullable = false)
-    private long quantity;
+    private int quantity;
 
     @Basic
     @Column(name = "price", nullable = false, precision = 0)
-    private int price;
+    private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
-    private Order order;
+    public OrderItem(int itemID, int orderId, int productId, int quantity, double price) {
+        this.itemId = itemID;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.price = price;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
-    private Product product;
+    public OrderItem() {}
 
     public int getItemId() {
         return itemId;
@@ -58,19 +60,19 @@ public class OrderItem {
         this.productId = productId;
     }
 
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -91,28 +93,13 @@ public class OrderItem {
     }
 
     @Override
-    public int hashCode() {
-        int result = itemId;
-        result = 31 * result + orderId;
-        result = 31 * result + productId;
-        result = 31 * result + (int) (quantity ^ (quantity >>> 32));
-        result = 31 * result + price;
-        return result;
-    }
-
-    public Order getOrderByOrderId() {
-        return order;
-    }
-
-    public void setOrderByOrderId(Order orderByOrderId) {
-        this.order = orderByOrderId;
-    }
-
-    public Product getProductByProductId() {
-        return product;
-    }
-
-    public void setProductByProductId(Product productByProductId) {
-        this.product = productByProductId;
+    public String toString() {
+        return "OrderItem{" +
+                "itemId=" + itemId +
+                ", orderId=" + orderId +
+                ", productId=" + productId +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }

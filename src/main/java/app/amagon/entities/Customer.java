@@ -29,7 +29,6 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
-
     public Customer(int customerId,String surname,String name,String address,String city) {
         this.setCustomerId(customerId);
         this.setSurname(surname);

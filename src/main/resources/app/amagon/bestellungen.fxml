@@ -94,7 +94,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
+                                    <Button mnemonicParsing="false" onAction="#searchOrder" prefHeight="30.0" prefWidth="125.0" stylesheets="@style.css" text="Suchen" textAlignment="CENTER" textFill="WHITE" />
                                     <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="125.0" stylesheets="@style.css" text="Stornieren" textAlignment="CENTER" textFill="WHITE" />
                                  </children>
                               </HBox>
@@ -115,25 +115,25 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="405.0" stylesheets="@style.css">
                                  <children>
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundennummer" wrappingWidth="140.0" />
                                     <Text fx:id="txtCustomerNr" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="405.0" stylesheets="@style.css">
                                  <children>
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungsnummer" wrappingWidth="140.0" />
                                     <Text fx:id="txtOrderNr" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="405.0" stylesheets="@style.css">
                                  <children>
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungsdatum" wrappingWidth="140.0" />
                                     <Text fx:id="txtOrderDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="49.0" prefWidth="405.0" stylesheets="@style.css">
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="405.0" stylesheets="@style.css">
                                  <children>
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="enthaltene MwSt(19%)" wrappingWidth="140.0" />
                                     <Text fx:id="txtTax" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="150.0" />

@@ -100,7 +100,7 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Text>
-                                          <TextField fx:id="txfSearchCustomerByName" prefHeight="30.0" prefWidth="145.0">
+                                          <TextField fx:id="txfSearchCustomerBySurname" onKeyReleased="#searchCustomer" prefHeight="30.0" prefWidth="145.0">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -198,17 +198,17 @@
                     <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="406.0" prefWidth="898.0" spacing="25.0">
                      <children>
-                        <VBox prefHeight="406.0" prefWidth="592.0">
+                        <VBox prefHeight="404.0" prefWidth="591.0">
                            <children>
                                     <HBox prefHeight="355.0" prefWidth="548.0">
                                         <children>
-                                            <TableView fx:id="customerTable" onMouseClicked="#clickRowCustomer" prefHeight="355.0" prefWidth="595.0">
+                                            <TableView fx:id="customerTable" onMouseClicked="#clickRowCustomer" prefHeight="342.0" prefWidth="591.0">
                                                 <columns>
                                                         <TableColumn fx:id="tbCustomerID" maxWidth="80.0" minWidth="80.0" text="Kunden-ID" />
-                                                        <TableColumn fx:id="tbCustomerSurname" minWidth="0.0" prefWidth="120.0" text="Nachname" />
-                                                          <TableColumn fx:id="tbCustomerName" minWidth="112.0" prefWidth="112.0" text="Vorname" />
-                                                          <TableColumn fx:id="tbCustomerAddress" prefWidth="139.0" text="Adresse" />
-                                                          <TableColumn fx:id="tbCustomerCity" prefWidth="140.0" text="Stadt" />
+                                                        <TableColumn fx:id="tbCustomerSurname" minWidth="0.0" prefWidth="153.0" text="Nachname" />
+                                                          <TableColumn fx:id="tbCustomerName" minWidth="0.0" prefWidth="187.0" text="Vorname" />
+                                                          <TableColumn fx:id="tbCustomerAddress" minWidth="0.0" prefWidth="63.0" text="Adresse" />
+                                                          <TableColumn fx:id="tbCustomerCity" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" text="Stadt" />
                                                 </columns>
                                                <columnResizePolicy>
                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

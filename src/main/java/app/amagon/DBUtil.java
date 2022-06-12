@@ -1,11 +1,15 @@
 package app.amagon;
 
+import app.amagon.entities.Order;
+import app.amagon.entities.OrderItem;
 import app.amagon.entities.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import app.amagon.entities.Customer;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class DBUtil {
@@ -21,6 +25,10 @@ public class DBUtil {
     private static ObservableList<Customer> customerList;
 
     private static ObservableList<Product> productList;
+
+    private static ObservableList<Order> orderList;
+
+    private static List<OrderItem> orderItemsList;
 
     public static void dbConnect() throws SQLException, ClassNotFoundException{
         String dbPass = "robert1324";
@@ -275,42 +283,6 @@ public class DBUtil {
         }
         return total;
     }
-
-    /*public static int getTotalProductsCategory(String category) throws SQLException {
-        int total = 0;
-        try {
-            if (!db_connection.isClosed()) {
-                p_stmt = db_connection.prepareStatement("select [amagon].[getTotalProductsCategory](?) as total");
-                p_stmt.setString(1, category);
-                rs = p_stmt.executeQuery();
-                while(rs.next()){
-                    total = rs.getInt(rs.findColumn("total"));
-                }
-            } else {
-                System.out.println("Es besteht keine Verbindung mit der Datenbank");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch(Exception e) { e.printStackTrace(); }
-            }
-            if (p_stmt != null) {
-                try {
-                    p_stmt.close();
-                } catch(Exception e) { e.printStackTrace(); }
-            }
-            if (db_connection != null) {
-                try {
-                    db_connection.close();
-                } catch(Exception e) { e.printStackTrace(); }
-            }
-        }
-        return total;
-    }*/
 
     public static HashMap<String,Integer> getListProductCategory() throws SQLException {
         HashMap<String, Integer> listNumberProductCategories = new HashMap<>();
@@ -567,6 +539,166 @@ public class DBUtil {
             throw e;
         }
         finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    public static void getCustomerBySurname(String sName) throws SQLException {
+        customerList.clear();
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[getCustomerBySurname] ?");
+                p_stmt.setString(1,sName);
+                rs = p_stmt.executeQuery();
+                while (rs.next()) {
+                    Customer customer = new Customer(
+                            rs.getInt("customer_id"),
+                            rs.getString("surname"),
+                            rs.getString("name"),
+                            rs.getString("address"),
+                            rs.getString("city"));
+                    customerList.add(customer);
+                }
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            System.out.println("Problem beim Ausführen von Query.");
+            e.printStackTrace();
+            throw e;
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    private static List<OrderItem> getOrderItemsList(String orderID) throws SQLException, ClassNotFoundException {
+        dbConnect();
+        getOrderItemsByOrderID(orderID);
+        dbDisconnect();
+        return orderItemsList;
+    }
+
+    public static void getOrderItemsByOrderID(String orderID) throws SQLException {
+        orderItemsList = FXCollections.observableArrayList();
+        orderItemsList.clear();
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[getOrderItemsByOrderID] ?");
+                p_stmt.setInt(1,Integer.parseInt(orderID));
+                rs = p_stmt.executeQuery();
+                while (rs.next()) {
+                    OrderItem orderItem = new OrderItem(
+                            rs.getInt("item_id"),
+                            rs.getInt("order_id"),
+                            rs.getInt("product_id"),
+                            rs.getInt("quantity"),
+                            rs.getDouble("price"));
+                    orderItemsList.add(orderItem);
+                }
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            System.out.println("Problem beim Ausführen von Query.");
+            e.printStackTrace();
+            throw e;
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    public static ObservableList<Order> getOrderListByCustomerID(String customerID) throws SQLException, ClassNotFoundException {
+        dbConnect();
+        getOrderByCustomerID(customerID);
+        dbDisconnect();
+        return orderList;
+    }
+
+    public static void getOrderByCustomerID(String customerID) throws SQLException {
+        orderList = FXCollections.observableArrayList();
+        orderList.clear();
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[getOrderByCustomerID] ?");
+                p_stmt.setString(1,customerID);
+                rs = p_stmt.executeQuery();
+                while (rs.next()) {
+                    Order order = new Order(
+                            rs.getInt("order_id"),
+                            rs.getDate("order_date"),
+                            rs.getInt("customer_id")
+                    );
+                    orderList.add(order);
+                }
+                for (Order order : orderList){
+                    order.setOrderItemsByOrderId(getOrderItemsList(String.valueOf(order.getOrderId())));
+                }
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            System.out.println("Problem beim Ausführen von Query.");
+            e.printStackTrace();
+            throw e;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
             if (rs != null) {
                 try {
                     rs.close();

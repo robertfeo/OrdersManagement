@@ -39,4 +39,5 @@ VALUES (CAST(GETDATE() AS Date),4),
 
 INSERT INTO [amagon].[order_item]
 VALUES (1,2,1,0),
-       (2,4,2,0);
+       (2,4,2,0),
+       (2,8,10,0);

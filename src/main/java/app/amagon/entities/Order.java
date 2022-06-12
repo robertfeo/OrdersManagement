@@ -22,12 +22,16 @@ public class Order {
     @Column(name = "customer_id", nullable = false)
     private int customerId;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    private Customer customer;
-
     @OneToMany(mappedBy = "orderByOrderId")
     private List<OrderItem> orderItemsByOrderId;
+
+    public Order(int orderId, Date orderDate, int customerId) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.customerId = customerId;
+    }
+
+    public Order() {}
 
     public int getOrderId() {
         return orderId;
@@ -63,27 +67,21 @@ public class Order {
         return Objects.equals(orderDate, order.orderDate);
     }
 
-    @Override
-    public int hashCode() {
-        int result = orderId;
-        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
-        result = 31 * result + customerId;
-        return result;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customerByCustomerId) {
-        this.customer = customerByCustomerId;
-    }
-
-    public Collection<OrderItem> getOrderItemsByOrderId() {
+    public List<OrderItem> getOrderItemsByOrderId() {
         return orderItemsByOrderId;
     }
 
     public void setOrderItemsByOrderId(List<OrderItem> orderItemsByOrderId) {
         this.orderItemsByOrderId = orderItemsByOrderId;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", orderDate=" + orderDate +
+                ", customerId=" + customerId +
+                ", orderItemsByOrderId=" + orderItemsByOrderId.toString() +
+                '}';
     }
 }

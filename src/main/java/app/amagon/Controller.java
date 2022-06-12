@@ -1,5 +1,6 @@
 package app.amagon;
 
+import app.amagon.entities.Order;
 import app.amagon.entities.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,12 +12,16 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import app.amagon.entities.Customer;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -44,7 +49,7 @@ public class Controller{
     @FXML
     public ChoiceBox<Integer> cbCustomerID;
     @FXML
-    public TextField txfSearchCustomerByName;
+    public TextField txfSearchCustomerBySurname;
     @FXML
     public TableView<Product> productTable;
     @FXML
@@ -77,6 +82,12 @@ public class Controller{
     public TextField txfProductQuantity;
     @FXML
     public Label lbNumberProducts;
+    public TextField txfCustomerNr;
+    public TextField txfOrderNr;
+    public Text txtCustomerNr;
+    public Text txtOrderNr;
+    public Text txtOrderDate;
+    public Text txtTax;
     double x,y;
     @FXML
     public Label lbNumberOrders;
@@ -94,7 +105,7 @@ public class Controller{
     private Scene scene;
 
     //  CHANGE TO MAIN SCENE
-    public void mainScene(@NotNull ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    public void mainScene(@NotNull ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/amagon/main.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -241,20 +252,22 @@ public class Controller{
     }
 
     public void refreshBarChartProduct() throws SQLException, ClassNotFoundException {
+        try {
+            barChart.getData().clear();
+            barChart.setLegendVisible(false);
+            xAxis.setLabel("Anzahl Produkte");
+            yAxis.setLabel("Kategorie");
+            yAxis.tickLabelFontProperty().set(Font.font(9));
+            XYChart.Series dataSeries = new XYChart.Series();
+            DBUtil.dbConnect();
+            HashMap<String,Integer> list = DBUtil.getListProductCategory();
+            DBUtil.dbDisconnect();
+            for (String key : list.keySet()){
+                dataSeries.getData().add(new XYChart.Data(key, list.get(key)));
+            }
+            barChart.getData().add(dataSeries);
+        }catch (Exception ignored){}
 
-        barChart.getData().clear();
-        barChart.setLegendVisible(false);
-        xAxis.setLabel("Anzahl Produkte");
-        yAxis.setLabel("Kategorie");
-        yAxis.tickLabelFontProperty().set(Font.font(9));
-        XYChart.Series dataSeries = new XYChart.Series();
-        DBUtil.dbConnect();
-        HashMap<String,Integer> list = DBUtil.getListProductCategory();
-        DBUtil.dbDisconnect();
-        for (String key : list.keySet()){
-            dataSeries.getData().add(new XYChart.Data(key, list.get(key)));
-        }
-        barChart.getData().add(dataSeries);
     }
 
     public void refreshDataMain() throws SQLException, ClassNotFoundException {
@@ -269,16 +282,40 @@ public class Controller{
 
     public void searchCustomer() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
-        if (!cbCustomerID.getSelectionModel().isEmpty()){
-            DBUtil.getCustomerByID(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()));
-            customerTable.setItems(DBUtil.getCustomersList());
-            for (Customer c : DBUtil.getAllCustomersList()){
-                if (c.getCustomerId() == cbCustomerID.getSelectionModel().getSelectedItem()){
-                    txfSearchCustomerByName.setText(c.getName());
+        try {
+            if (!cbCustomerID.getSelectionModel().isEmpty()){
+                DBUtil.getCustomerByID(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()));
+                customerTable.setItems(DBUtil.getCustomersList());
+                for (Customer c : DBUtil.getAllCustomersList()){
+                    if (c.getCustomerId() == cbCustomerID.getSelectionModel().getSelectedItem()){
+                        txfSearchCustomerBySurname.setText(c.getSurname());
+                    }
                 }
+            } else if (cbCustomerID.getSelectionModel().isEmpty() && !txfSearchCustomerBySurname.getText().isEmpty()) {
+                DBUtil.getCustomerBySurname(txfSearchCustomerBySurname.getText());
+            }else{
+                refreshCustomerTable();
             }
-        }
+        }catch(Exception ignored){}
         DBUtil.dbDisconnect();
+    }
+
+    public void searchOrder() throws SQLException, ClassNotFoundException {
+        Order customerOrder = new Order();
+        if (!txfCustomerNr.getText().isEmpty()){
+            DBUtil.dbConnect();
+            DBUtil.getOrderByCustomerID(txfCustomerNr.getText());
+            for (Order order : DBUtil.getOrderListByCustomerID(txfCustomerNr.getText())){
+                customerOrder = order;
+                System.out.println(order.toString());
+            }
+            DBUtil.dbDisconnect();
+        }
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        txtOrderDate.setText(dateFormat.format(customerOrder.getOrderDate()));
+        txtOrderNr.setText(String.valueOf(customerOrder.getOrderId()));
+        txtCustomerNr.setText(String.valueOf(customerOrder.getCustomerId()));
+        txfOrderNr.setText(String.valueOf(customerOrder.getOrderId()));
     }
 
     public void saveEditProductToDatabase() throws SQLException, ClassNotFoundException, NumberFormatException{
@@ -306,7 +343,7 @@ public class Controller{
             txfName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
             txfAddress.setText(customerTable.getSelectionModel().getSelectedItem().getAddress());
             txfCity.setText(customerTable.getSelectionModel().getSelectedItem().getCity());
-            txfSearchCustomerByName.setText(customerTable.getSelectionModel().getSelectedItem().getName());
+            txfSearchCustomerBySurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
             cbCustomerID.getSelectionModel().select(customerTable.getSelectionModel().getSelectedItem().getCustomerId()-1);
         }catch(NullPointerException ignored){}
     }
