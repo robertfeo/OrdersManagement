@@ -29,13 +29,15 @@ public class Controller{
     @FXML
     public TableColumn<Customer,Integer> tbCustomerID;
     @FXML
-    public TableColumn<Customer,String>  tbCustomerSurname;
+    public TableColumn<Customer,String> tbCustomerSurname;
     @FXML
     public TableColumn<Customer,String> tbCustomerName;
     @FXML
     public TableColumn<Customer,String> tbCustomerAddress;
     @FXML
     public TableColumn<Customer,String> tbCustomerCity;
+    @FXML
+    public TableView<Customer> customerTable;
     @FXML
     public TextField txfDeleteByID;
     @FXML
@@ -61,13 +63,15 @@ public class Controller{
     @FXML
     public TableColumn<Product, BigDecimal> tbProductPrice;
     @FXML
+    public TableColumn<Product, Integer> tbProductQuantity;
+    @FXML
     public TextField txfProductName;
     @FXML
     public TextField txfProductCategory;
     @FXML
     public TextField txfProductPrice;
     @FXML
-    public BarChart<CategoryAxis, NumberAxis> barChart;
+    public BarChart<NumberAxis, CategoryAxis> barChart;
     @FXML
     public CategoryAxis yAxis;
     @FXML
@@ -76,8 +80,6 @@ public class Controller{
     public TextField txfProductID;
     @FXML
     public Button btnDeleteProduct;
-    @FXML
-    public TableColumn<Product, Integer> tbProductQuantity;
     @FXML
     public TextField txfProductQuantity;
     @FXML
@@ -126,8 +128,6 @@ public class Controller{
     public Button btnCustomerAdd;
     @FXML
     public Button btnCustomerRefresh;
-    @FXML
-    public TableView<Customer> customerTable;
     @FXML
     private Label lbRegisteredCustomer;
     @FXML
@@ -207,7 +207,6 @@ public class Controller{
     public void exitProgram(@NotNull ActionEvent event) throws SQLException {
         final Node source = (Node)event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
-        DBUtil.dbDisconnect();
         stage.close();
     }
 
@@ -220,7 +219,6 @@ public class Controller{
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        DBUtil.dbDisconnect();
     }
 
     //  FÜGE PRODUKT ZUM DATENBANK HINZU UND AKTUALLIESIERE KUNDENTABELLE
@@ -232,7 +230,6 @@ public class Controller{
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        DBUtil.dbDisconnect();
     }
 
     //  LÖSCHE KUNDE AUS DER DATENBANK
@@ -244,7 +241,6 @@ public class Controller{
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        DBUtil.dbDisconnect();
     }
 
     //  LÖSCHE PRODUKT AUS DER DATENBANK
@@ -256,7 +252,6 @@ public class Controller{
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        DBUtil.dbDisconnect();
     }
 
     //  AKTUALLISIERE KUNDENTABELLE
@@ -268,7 +263,6 @@ public class Controller{
         tbCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tbCustomerCity.setCellValueFactory(new PropertyValueFactory<>("city"));
         customerTable.setItems(DBUtil.getAllCustomersList());
-        DBUtil.dbDisconnect();
         refreshCustomerChoiceList();
     }
 
@@ -281,14 +275,12 @@ public class Controller{
         tbProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tbProductQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         productTable.setItems(DBUtil.getProductList());
-        DBUtil.dbDisconnect();
     }
 
     //  AKTUALISIERE AUSWAHLLISTE, MIT DER EIN KUNDE GEFUNDEN WERDEN KANN
     public void refreshCustomerChoiceList() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         cbCustomerID.setItems(DBUtil.getCustomerIDs());
-        DBUtil.dbDisconnect();
     }
 
     //  AKTUALISIERE BALKENDIAGRAMM MIT DER ANZAHL DER PRODUKTE SORTIERT NACH KATEGORIE
@@ -301,8 +293,8 @@ public class Controller{
         XYChart.Series dataSeries = new XYChart.Series();
         DBUtil.dbConnect();
         HashMap<String,Integer> list = DBUtil.getListProductCategory();
-        DBUtil.dbDisconnect();
         for (String key : list.keySet()){
+            //  Füge Anzahl Produkte für jeden key(String category) von der HashMap zu der Datenreihe hinzu
             dataSeries.getData().add(new XYChart.Data(key, list.get(key)));
         }
         barChart.getData().add(dataSeries);
@@ -312,13 +304,13 @@ public class Controller{
     public void refreshDataMain() throws SQLException, ClassNotFoundException {
         DBUtil.dbConnect();
         lbRegisteredCustomer.setText(Integer.toString(DBUtil.getTotalCustomers()));
-        DBUtil.dbDisconnect();
+
         DBUtil.dbConnect();
         lbNumberProducts.setText(Integer.toString(DBUtil.getTotalProducts()));
-        DBUtil.dbDisconnect();
+
         DBUtil.dbConnect();
         lbNumberOrders.setText(Integer.toString(DBUtil.getTotalOrders()));
-        DBUtil.dbDisconnect();
+
         refreshBarChartProduct();
     }
 
@@ -340,7 +332,7 @@ public class Controller{
                 refreshCustomerTable();
             }
             if (cbHasOrder.isSelected() && !cbCustomerID.getSelectionModel().isEmpty()){
-                for(Order order : DBUtil.getOrderListByCustomerID(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()))){
+                for(Order order : DBUtil.getOrderList(String.valueOf(cbCustomerID.getSelectionModel().getSelectedItem()),"")){
                     if (order.getCustomerId() == cbCustomerID.getSelectionModel().getSelectedItem()){
                         txtOrderNrCustomerScene.setText(String.valueOf(order.getOrderId()));
                         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -355,40 +347,42 @@ public class Controller{
                 }
             }
         }catch(Exception ignored){}
-        DBUtil.dbDisconnect();
     }
 
     //  SUCHE NACH EINER SPEZIFISCHEN BESTELLUNG IN DER DATENBANK
     public void searchOrder() throws SQLException, ClassNotFoundException {
         Order customerOrder = new Order();
-        if (!txfCustomerNr.getText().isEmpty()){
+        if (!txfCustomerNr.getText().isEmpty() || !txfOrderNr.getText().isEmpty()){
             DBUtil.dbConnect();
-            DBUtil.getOrderByCustomerID(txfCustomerNr.getText());
-            for (Order order : DBUtil.getOrderListByCustomerID(txfCustomerNr.getText())){
+            for (Order order : DBUtil.getOrderList(txfCustomerNr.getText(),txfOrderNr.getText())){
                 customerOrder = order;
             }
-            showInvoiceItems();
-            DBUtil.dbDisconnect();
         }
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         txtOrderDate.setText(dateFormat.format(customerOrder.getOrderDate()));
         txtOrderNr.setText(String.valueOf(customerOrder.getOrderId()));
         txtCustomerNr.setText(String.valueOf(customerOrder.getCustomerId()));
-        txfOrderNr.setText(String.valueOf(customerOrder.getOrderId()));
+        showInvoiceItems(txfCustomerNr.getText(),txfOrderNr.getText());
+
+        DBUtil.dbConnect();
+        txtTax.setText(String.valueOf(DBUtil.getMwStForInvoice(customerOrder.getOrderId())) + " €");
+
         DBUtil.dbConnect();
         txtTotalPriceOrder.setText(String.valueOf(DBUtil.getTotalInvoicePrice(customerOrder.getCustomerId())) + " €");
-        DBUtil.dbDisconnect();
+        txfCustomerNr.setText("");
+        txfOrderNr.setText("");
     }
 
     //  ZEIGE DIE POSITIONSTABELLE FÜR EINEN SPEZIFISCHEN KUNDEN
-    public void showInvoiceItems() throws SQLException, ClassNotFoundException {
+    public void showInvoiceItems(String customerID,String orderID) throws SQLException, ClassNotFoundException {
         tbPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         tbItemID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
         tbItemDescription.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));
         tbNumberItems.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tbPriceItem.setCellValueFactory(new PropertyValueFactory<>("itemPrice"));
         tbTotalPriceItem.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        invoiceItemsTable.setItems(DBUtil.getInvoiceItemsListByCustomerID(txfCustomerNr.getText()));
+        DBUtil.dbConnect();
+        invoiceItemsTable.setItems(DBUtil.getInvoiceItemsList(txfCustomerNr.getText(),txfOrderNr.getText()));
     }
 
     //  SPEICHERE LOKAL GEÄNDERTE ZEILE IN DER DATENBANK
@@ -408,7 +402,6 @@ public class Controller{
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        DBUtil.dbDisconnect();
     }
 
     //  INTERPRETIERE MOUSE-CLICK VON EINER ZEILE IN DER KUNDENTABELLE
@@ -420,8 +413,7 @@ public class Controller{
             txfCity.setText(customerTable.getSelectionModel().getSelectedItem().getCity());
             txfSearchCustomerBySurname.setText(customerTable.getSelectionModel().getSelectedItem().getSurname());
             cbCustomerID.getSelectionModel().select(customerTable.getSelectionModel().getSelectedItem().getCustomerId()-1);
-            showInvoiceItems();
-        }catch(NullPointerException | SQLException | ClassNotFoundException ignored){}
+        }catch(NullPointerException ignored){}
     }
 
     //  INTERPRETIERE MOUSE-CLICK VON EINER ZEILE IN DER KUNDENTABELLE

@@ -115,7 +115,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="373.0">
                            <children>
-                              <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamt auf Lager" wrappingWidth="110.0" />
+                              <Text fill="#5667fd" strokeType="OUTSIDE" strokeWidth="0.0" text="Menge" wrappingWidth="110.0" />
                               <TextField fx:id="txfProductQuantity" prefHeight="30.0" prefWidth="195.0" />
                            </children>
                         </HBox>

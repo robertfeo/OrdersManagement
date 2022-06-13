@@ -328,14 +328,14 @@ public class DBUtil {
 
     //  BERECHNE GESAMTPREIS FÜR EINE RECHNUNG NACH KUNDEN-ID
     public static double getTotalInvoicePrice(int customerID) throws SQLException {
-        int total = 0;
+        double total = 0;
         try {
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("select [amagon].[getInvoiceTotal](?) as total");
                 p_stmt.setString(1,String.valueOf(customerID));
                 rs = p_stmt.executeQuery();
                 while(rs.next()){
-                    total = rs.getInt(rs.findColumn("total"));
+                    total = rs.getDouble(rs.findColumn("total"));
                 }
             } else {
                 System.out.println("Es besteht keine Verbindung mit der Datenbank");
@@ -743,9 +743,13 @@ public class DBUtil {
         }
     }
 
-    public static ObservableList<Order> getOrderListByCustomerID(String customerID) throws SQLException, ClassNotFoundException {
+    public static ObservableList<Order> getOrderList(String customerID, String orderID) throws SQLException, ClassNotFoundException {
         dbConnect();
-        getOrderByCustomerID(customerID);
+        if (!customerID.isEmpty()){
+            getOrderByCustomerID(customerID);
+        } else if (!orderID.isEmpty()) {
+            getOrderByOrderID(orderID);
+        }
         dbDisconnect();
         return orderList;
     }
@@ -801,16 +805,71 @@ public class DBUtil {
         }
     }
 
-    public static ObservableList<InvoiceItem> getInvoiceItemsListByCustomerID(String customerID) throws SQLException, ClassNotFoundException {
+    public static void getOrderByOrderID(String orderID) throws SQLException {
+        orderList = FXCollections.observableArrayList();
+        orderList.clear();
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[getOrderByOrderID] ?");
+                p_stmt.setString(1,orderID);
+                rs = p_stmt.executeQuery();
+                while (rs.next()) {
+                    Order order = new Order(
+                            rs.getInt("order_id"),
+                            rs.getDate("order_date"),
+                            rs.getInt("customer_id")
+                    );
+                    orderList.add(order);
+                }
+                for (Order order : orderList){
+                    order.setOrderItemsByOrderId(getOrderItemsList(String.valueOf(order.getOrderId())));
+                }
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            System.out.println("Problem beim Ausführen von Query.");
+            e.printStackTrace();
+            throw e;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    public static ObservableList<InvoiceItem> getInvoiceItemsList(String customerID, String orderID) throws SQLException, ClassNotFoundException {
         dbConnect();
-        getInvoiceItemsByCustomerID(customerID);
+        if (!customerID.isEmpty()){
+            getInvoiceItemsByCustomerID(customerID);
+        } else if (!orderID.isEmpty()) {
+            getInvoiceItemsByOrderID(orderID);
+        }
         dbDisconnect();
         return invoiceItemsList;
     }
 
     public static void getInvoiceItemsByCustomerID(String customerID) throws SQLException {
         invoiceItemsList = FXCollections.observableArrayList();
-        //invoiceItemsList.clear();
+        invoiceItemsList.clear();
         try{
             if (!db_connection.isClosed()) {
                 p_stmt = db_connection.prepareStatement("exec [amagon].[getInvoiceItemsByCustomer] ?");
@@ -861,5 +920,91 @@ public class DBUtil {
                 catch(Exception e) { e.printStackTrace(); }
             }
         }
+    }
+
+    public static void getInvoiceItemsByOrderID(String orderID) throws SQLException {
+        invoiceItemsList = FXCollections.observableArrayList();
+        invoiceItemsList.clear();
+        try{
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("exec [amagon].[getInvoiceItemsByOrderID] ?");
+                p_stmt.setString(1,orderID);
+                rs = p_stmt.executeQuery();
+                while (rs.next()) {
+                    InvoiceItem invoiceItem = new InvoiceItem(
+                            rs.getInt("Position"),
+                            rs.getInt("Artikelnummer"),
+                            rs.getString("Artikelbezeichnung"),
+                            rs.getInt("Anzahl"),
+                            rs.getDouble("Listenpreis"),
+                            rs.getDouble("Gesamtbetrag")
+
+                    );
+                    invoiceItemsList.add(invoiceItem);
+                }
+                for (Order order : orderList){
+                    order.setOrderItemsByOrderId(getOrderItemsList(String.valueOf(order.getOrderId())));
+                }
+            }
+            else{
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        }catch (SQLException e){
+            System.out.println("Problem beim Ausführen von Query.");
+            e.printStackTrace();
+            throw e;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+            if (db_connection != null) {
+                try {
+                    db_connection.close();
+                }
+                catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    public static double getMwStForInvoice(int orderID) throws SQLException {
+        double mwst = 0;
+        try {
+            if (!db_connection.isClosed()) {
+                p_stmt = db_connection.prepareStatement("select [amagon].[getMwStForInvoice](?) as mwst");
+                p_stmt.setString(1,String.valueOf(orderID));
+                rs = p_stmt.executeQuery();
+                while(rs.next()){
+                    mwst = rs.getDouble(rs.findColumn("mwst"));
+                }
+            } else {
+                System.out.println("Es besteht keine Verbindung mit der Datenbank");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+            if (p_stmt != null) {
+                try {
+                    p_stmt.close();
+                } catch(Exception e) { e.printStackTrace(); }
+            }
+        }
+        return mwst;
     }
 }

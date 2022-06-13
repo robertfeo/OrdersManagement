@@ -1,3 +1,4 @@
+-- INHALTE LÖSCHEN
 DELETE FROM [amagon].[order_item] WHERE [order_id] > 0;
 DELETE FROM [amagon].[order] WHERE [order_id] > 0;
 DELETE FROM [amagon].[customer] WHERE [customer_id] > 0;
@@ -9,6 +10,7 @@ DBCC CHECKIDENT ('[amagon].[product]', RESEED, 0)
 DBCC CHECKIDENT ('[amagon].[order]', RESEED, 0)
 DBCC CHECKIDENT ('[amagon].[order_item]', RESEED, 0)
 
+-- TESTDATEN KUNDEN
 INSERT INTO [amagon].[customer]
 VALUES
     ('Combs','Quynn','Ap #809-893 Mauris. Rd.','Zaporizhzhia oblast'),
@@ -23,6 +25,7 @@ VALUES
     ('Kappel','Sabine', 'Scharnweberstrasse 84','Neuberg'),
     ('Drescher','Stefanie', 'Schaarsteinweg 53', N'Mötzing');
 
+-- TESTDATEN PRODUKTE
 INSERT INTO [amagon].[product]
 VALUES ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', 'Grafikkarten', '1751.01', 7),
        ('12GB MSI GeForce RTX 3060 Ventus 2X', 'Grafikkarten', '429', 12),
@@ -33,10 +36,12 @@ VALUES ('MSI GeForce RTX 3080 Ti SUPRIM X 12GB', 'Grafikkarten', '1751.01', 7),
        ('NZXT Kraken X63','Kühlung Wasser(WaKü)', '133.70', 23),
        ('MSI Tomahawk WIFI Intel B660 So. 1700 Dual Channel DDR4','Mainboards', '206.99', 17);
 
+-- TESTDATEN BESTELLUNGEN
 INSERT INTO [amagon].[order]
 VALUES (CAST(GETDATE() AS Date),4),
        (CAST(GETDATE() AS Date),8);
 
+-- TESTDATEN POSITIONSTABELLE
 INSERT INTO [amagon].[order_item]
 VALUES (1,2,1,0),
        (1,1,1,0),
