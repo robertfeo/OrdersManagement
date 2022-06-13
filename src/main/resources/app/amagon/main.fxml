@@ -138,7 +138,7 @@
                </VBox.margin></Button>
             <HBox alignment="CENTER" prefHeight="278.0" prefWidth="918.0">
                <children>
-                  <BarChart fx:id="barChart" animated="false" barGap="8.0" prefHeight="278.0" prefWidth="809.0" title="Anzahl Produkte nach Kategorie">
+                  <BarChart fx:id="barChart" animated="false" barGap="8.0" prefHeight="278.0" prefWidth="809.0">
                      <xAxis>
                         <CategoryAxis fx:id="yAxis" side="BOTTOM" />
                      </xAxis>
